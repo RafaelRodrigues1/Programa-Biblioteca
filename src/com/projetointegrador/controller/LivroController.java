@@ -97,11 +97,11 @@ public class LivroController {
     public void preencheTabela(List<Livro> lista){        
         DefaultTableModel tableModel = (DefaultTableModel) livroView.getjTableLivros().getModel();
         tableModel.setNumRows(0);
-        for(Livro livro: lista){
-            tableModel.addRow(new Object[]{livro.getCodigo(), livro.getTitulo(), livro.getAutor(), 
+        lista.forEach(livro -> {
+            tableModel.addRow(new Object[]{livro.getCodigo(), livro.getTitulo(), livro.getAutor(),
                 livro.getEditora(), livro.getEdicao(), livro.getGenero().getGenero(), 
                 livro.getAlugavel(), livro.getAnotacoes(), livro.getAlugado()});
-        }
+        });
     }
     
     public void selecionaLivro(){

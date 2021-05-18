@@ -59,10 +59,26 @@ public class ClienteBeans {
                 listaClienteMetodo.add(new Cliente(linhaVect[0], dataNasc, linhaVect[2], linhaVect[3],
                         linhaVect[4], linhaVect[5], numLivros));            
             }
+            listaClienteMetodo.sort(Cliente::compareTo);
             return listaClienteMetodo;
         }catch(ParseException ex){
             System.out.println(ex.getMessage());
             return null;
         }
+    }
+    
+    public Cliente selecionaCliente(String nome, String data, String email){
+        try{    
+            Date dataNasc = sdf.parse(data);
+            for(Cliente cliente : listarCliente()){
+                if(cliente.getEmail().equals(email) && cliente.getNome().equals(nome) 
+                        && cliente.getDataNascimento().equals(dataNasc)){
+                    return cliente;
+                }
+            }
+        }catch(ParseException ex){
+            return null;
+        }
+        return null;
     }
 }

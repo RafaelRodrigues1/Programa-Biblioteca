@@ -330,7 +330,7 @@ public class LivroView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonApagarActionPerformed
 
     private void jTableLivrosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTableLivrosKeyReleased
-        livroController.selecionaLivro();
+       // livroController.selecionaLivro();
     }//GEN-LAST:event_jTableLivrosKeyReleased
 
     private void jTextPesquisaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextPesquisaKeyReleased
