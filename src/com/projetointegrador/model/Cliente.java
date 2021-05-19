@@ -35,11 +35,10 @@ public class Cliente extends Pessoa  {
     public int compareTo(Pessoa o) {
         return this.getNome().compareTo(o.getNome());
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 83 * hash + Objects.hashCode(this.cpf);
         return hash;
     }
 
@@ -55,7 +54,13 @@ public class Cliente extends Pessoa  {
             return false;
         }
         final Cliente other = (Cliente) obj;
-        return Objects.equals(this.cpf, other.cpf);
+        if (!Objects.equals(this.email, other.email)) {
+            return false;
+        }
+        if (!Objects.equals(this.cpf, other.cpf)) {
+            return false;
+        }
+        return true;
     }
 
     public String getEndereco() {
@@ -86,11 +91,14 @@ public class Cliente extends Pessoa  {
         return cpf;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
     public Integer getNumeroLivros() {
         return numeroLivros;
     }
+
+    @Override
+    public String toString() {
+        return "Cliente{" + "telefone=" + telefone + ", email=" + email + ", cpf=" + cpf + '}';
+    }
+    
+    
 }

@@ -57,21 +57,21 @@ public class LivroBeans {
         return livroDao.atualizaBDLivro(listaStr);
     }
     
-    public Boolean alteraLivro(String cod, String titulo, String autor, String genero, String editora, 
-            Boolean alugavel, String edicao, String anotacoes){
+    public Boolean alteraLivro(String cod, String tituloAtt, String autorAtt, String generoAtt, String editoraAtt, 
+            Boolean alugavelAtt, String edicaoAtt, String anotacoesAtt){
         List<String> listaStr = new ArrayList<>();
         List<Livro> listaLivro = listarLivros();
-        Genero gender = Genero.valueOf(genero.toUpperCase().replace(" ", "_"));
+        Genero gender = Genero.valueOf(generoAtt.toUpperCase().replace(" ", "_"));
         listaLivro.sort((a, b) -> a.getCodigo().compareTo(b.getCodigo()));//Expressão lambda
         listaLivro.forEach(livro -> {
             if(livro.getCodigo().toString().equals(cod)){
-                livro.setTitulo(titulo);
-                livro.setAutor(autor);
+                livro.setTitulo(tituloAtt);
+                livro.setAutor(autorAtt);
                 livro.setGenero(gender);
-                livro.setEditora(editora);
-                livro.setAlugavel(alugavel);
-                livro.setEdicao(edicao);
-                livro.setAnotacoes(anotacoes);
+                livro.setEditora(editoraAtt);
+                livro.setAlugavel(alugavelAtt);
+                livro.setEdicao(edicaoAtt);
+                livro.setAnotacoes(anotacoesAtt);
             }
         }); 
         listaLivro.forEach(livro -> {

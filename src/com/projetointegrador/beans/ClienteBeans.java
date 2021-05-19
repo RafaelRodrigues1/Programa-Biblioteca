@@ -15,9 +15,9 @@ import java.util.List;
  */
 public class ClienteBeans {
     
-    private ClienteController clienteController;
-    private ClienteDao clienteDao;
-    private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    private final ClienteController clienteController;
+    private final ClienteDao clienteDao;
+    private final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     
     public ClienteBeans(ClienteController clienteController) {
         this.clienteController = clienteController;
@@ -25,28 +25,63 @@ public class ClienteBeans {
     }
     
     public Boolean cadastrar(String nome, String dataNascimento, String email, String cpf, 
-            String endereco, String telefone){
+            String endereco, String telefone) throws Exception{
         try{
             List<Cliente> listaCliente = listarCliente();
             Date data = sdf.parse(dataNascimento);
             Cliente cliente = new Cliente(nome, data, email, cpf, endereco, telefone, 0);
-            if(!listaCliente.contains(cliente)){
-                String cadastroCliente = cliente.getNome() + ";" + dataNascimento + ";" + cliente.getEmail() + ";" +
+            System.out.println(cliente);
+            System.out.println(listaCliente);
+            if (listaCliente.stream().anyMatch(clientes -> (clientes.getCpf().equals(cliente.getCpf()) || 
+                    clientes.getEmail().equals(cliente.getEmail())))) {
+                throw new Exception("Cliente já consta no cadastro");
+            }
+            String cadastroCliente = cliente.getNome() + ";" + dataNascimento + ";" + cliente.getEmail() + ";" +
                     cliente.getCpf() + ";" + cliente.getEndereco() + ";" + cliente.getTelefone() + ";" + 
                         cliente.getNumeroLivros().toString(); 
                 return clienteDao.cadastraCliente(cadastroCliente);
-            }else{
-                return false;
-            }
         }catch(ParseException ex){
             System.out.println(ex.getMessage());
             return false;
         }
     }
     
+    public Boolean alteraCliente(String nome, String email, String nomeAtt, String dataNascimentoAtt, String emailAtt, 
+            String enderecoAtt, String telefoneAtt){
+        try{  
+            Date dataNasc = sdf.parse(dataNascimentoAtt);
+            List<String> listaStr = new ArrayList<>();
+            List<Cliente> listaCliente = listarCliente();
+            listaCliente.forEach(cliente ->{
+                if(cliente.getNome().equals(nome) && cliente.getEmail().equals(email)){
+                    cliente.setNome(nomeAtt);
+                    cliente.setDataNascimento(dataNasc);                   
+                    cliente.setEmail(emailAtt);
+                    cliente.setEndereco(enderecoAtt);
+                    cliente.setTelefone(telefoneAtt);
+                }
+            });
+            listaCliente.forEach(cliente -> {
+                String data = sdf.format(cliente.getDataNascimento());
+                listaStr.add(cliente.getNome() + ";" + data + ";" + cliente.getEmail() + ";" +
+                    cliente.getCpf() + ";" + cliente.getEndereco() + ";" + cliente.getTelefone() + ";" + 
+                        cliente.getNumeroLivros().toString());
+            });
+            return clienteDao.atualizaBDLivro(listaStr);
+        }catch(ParseException ex){
+            return false;
+        }
+    }
     
-    
-    
+    public final List<Cliente> pesquisaCliente(String nomePesquisa){
+        List<Cliente> listaFiltrada = new ArrayList<>();
+        List<Cliente> listaCliente = listarCliente();
+        listaCliente.stream()
+                .filter(cliente -> cliente.getNome().toUpperCase().contains(nomePesquisa.toUpperCase()))
+                .forEachOrdered(listaFiltrada::add);
+        listaFiltrada.sort(Cliente::compareTo);
+        return listaFiltrada;
+    }
     
     public final List<Cliente> listarCliente(){
         try{

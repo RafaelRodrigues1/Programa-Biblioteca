@@ -44,4 +44,16 @@ public class ClienteDao {
             return false;
         }
     }
+    
+    public Boolean atualizaBDLivro(List<String> listaCliente){
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(file))){
+            for (String linha : listaCliente) {
+                bw.write(linha);
+                bw.newLine();
+            }
+            return true;
+        }catch(Exception ex){
+            return false;
+        }
+    }
 }

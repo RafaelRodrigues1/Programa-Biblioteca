@@ -334,7 +334,7 @@ public class LivroView extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableLivrosKeyReleased
 
     private void jTextPesquisaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextPesquisaKeyReleased
-        livroController.atualizaTabela();
+        livroController.pesquisaTabela();
     }//GEN-LAST:event_jTextPesquisaKeyReleased
 
     /**

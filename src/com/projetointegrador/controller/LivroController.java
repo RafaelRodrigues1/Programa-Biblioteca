@@ -64,12 +64,12 @@ public class LivroController {
         Integer row = livroView.getjTableLivros().getSelectedRow();
         String cod = livroView.getjTableLivros().getValueAt(row, 0).toString();
         if(Panes.confirma("Tem certeza que deseja alterar o livro:\n" + 
-                livroView.getjTableLivros().getValueAt(row, 1).toString())!=1){
+                livroView.getjTableLivros().getValueAt(row, 1).toString() + "?")!=1){
             if(livroBeans.alteraLivro(cod, livroView.getjTextTitulo().getText(), livroView.getjTextAutor().getText()
                             , livroView.getjComboGenero().getSelectedItem().toString(), livroView.getjTextEditora().getText(),
                             livroView.getjCheckAlugavel().isSelected(), livroView.getjTextEdicao().getText(),
                             livroView.getjTextAnotacoes().getText())){
-                Panes.mostraMsg("Livro alterado");
+                Panes.mostraMsg("Dados do livro alterados");
                 tabelaDefault();
             }else{
                 Panes.mostraMsg("Erro ao alterar");
@@ -79,12 +79,10 @@ public class LivroController {
     }
     
     public void voltar(){
-        mainView = new MainView();
-        mainView.setVisible(true);
         livroView.setVisible(false);
     }
     
-    public void atualizaTabela(){
+    public void pesquisaTabela(){
         List<Livro> lista = livroBeans.pesquisaLivro(livroView.getjTextPesquisa().getText());
         preencheTabela(lista);
     }
