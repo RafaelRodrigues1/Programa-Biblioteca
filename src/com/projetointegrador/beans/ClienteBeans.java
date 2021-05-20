@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -74,11 +75,11 @@ public class ClienteBeans {
     }
     
     public final List<Cliente> pesquisaCliente(String nomePesquisa){
-        List<Cliente> listaFiltrada = new ArrayList<>();
+        //List<Cliente> listaFiltrada = new ArrayList<>();
         List<Cliente> listaCliente = listarCliente();
-        listaCliente.stream()
-                .filter(cliente -> cliente.getNome().toUpperCase().contains(nomePesquisa.toUpperCase()))
-                .forEachOrdered(listaFiltrada::add);
+        List<Cliente> listaFiltrada= listaCliente.stream()
+                        .filter(cliente -> cliente.getNome().toUpperCase().contains(nomePesquisa.toUpperCase()))
+                        .collect(Collectors.toList());
         listaFiltrada.sort(Cliente::compareTo);
         return listaFiltrada;
     }

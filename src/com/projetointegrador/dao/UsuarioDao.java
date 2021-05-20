@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 public class UsuarioDao {
     
-    private final String path = "C:\\Users\\RAFAEL\\Documents\\NetBeansProjects\\AppProjetoBiblioteca\\DataBase\\Usuarios.txt";
+    private final String path = "DataBase\\Usuarios.txt";
     private LoginBeans loginBeans;
     private UsuarioBeans cadastroUsuarioBeans;
     private final File file = new File(path);

@@ -1,0 +1,27 @@
+Dom Casmurro;Assis, Machado;LITERATURA_NACIONAL;Editora Rocco;8° edição, 2008;;Sim;Sim;1000
+Genealogia da moral;Nietzsche, Friedrich;ENSAIO;Editora Atica;3° edição;;Não;Não;1001
+Crepúsculo dos ídolos;Nietzsche, Friedrich;ENSAIO;Editora Record;7° edição, 2004;;Não;Não;1002
+O homem que calculava;Tahan, Malba;AVENTURA;Moderna;;;Sim;Sim;1003
+1984;George Orwell;FICCÃO;Companhia das letras;9° edição;;Não;Não;1004
+Dom Quixote de la Mancha;Cervantes, Miguel de;CONTO;Montecristo editora;;;Sim;Sim;1005
+Dom Quixote de la Mancha;Cervantes, Miguel de;CONTO;Montecristo editora;;;Não;Não;1006
+O Pequeno Príncipe;Saint-Exupéry, Antoine de ;LITERATURA_INFANTIL;Autêntica;;;Sim;Sim;1007
+O Bandolim do Capitão Corelli;Bernières, Louis de ;ROMANCE;Record;6° edição;;Não;Não;1008
+O Conde de Monte Cristo;Dumas, Alexandre;ROMANCE;LeBooks;;;Sim;Sim;1009
+Cem Anos de Solidão;Márquez, Gabriel García;DRAMA;Record;;;Não;Não;1010
+Cem Anos de Solidão;Márquez, Gabriel García;DRAMA;Record;;;Sim;Sim;1011
+Grande Sertão: Veredas;Rosa, João Guimarães;CLÁSSICO;Companhia das letras;;;Sim;Sim;1012
+A Hora da Estrela;Lispector, Clarice;LITERATURA_NACIONAL;Editora Rocco;;;Sim;Sim;1013
+Hamlet;Shakespeare, William;DRAMA;L&PM pocket;4° edição;Tradução de Millôr Fernandes;Sim;Sim;1014
+Hamlet;Shakespeare, William;DRAMA;L&PM pocket;4° edição;Tradução de Millôr Fernandes;Não;Não;1015
+O Banquete;Platão;CLÁSSICO;L&PM pocket;;;Sim;Sim;1017
+Crime e Castigo;Dostoiévski, Fiódor;CLÁSSICO;Record;1° edição, 2012;;Não;Não;1018
+O Retrato de Dorian Gray;Wilde, Oscar;DRAMA;Martin Claret;;;Sim;Sim;1019
+Harry Potter e a pedra filosofal;Rowling, J.K;AVENTURA;Atica;;;Sim;Sim;1020
+Harry Potter e a câmara secreta;Rowling, J.K;AVENTURA;Atica;;;Sim;Sim;1021
+Harry Potter e o cálice de fogo;Rowling, J.K;AVENTURA;Atica;;;Sim;Sim;1022
+Harry Potter e as relíquias da morte;Rowling, J.K;AVENTURA;Atica;;;Sim;Sim;1023
+Harry Potter e o príncipe mestiço;Rowling, J.K;AVENTURA;Atica;;;Sim;Sim;1024
+O Pequeno Príncipe;Saint-Exupéry, Antoine de ;LITERATURA_INFANTIL;Record;;;Não;Não;1025
+O Banquete;Platão;CLÁSSICO;L&PM pocket;;;Não;Não;1026
+Genealogia da moral;Nietzsche, Friedrich;ENSAIO;Editora Atica;3° edição;;Sim;Sim;1027

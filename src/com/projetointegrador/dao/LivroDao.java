@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class LivroDao {
     
-    private final String path = "C:\\Users\\RAFAEL\\Documents\\NetBeansProjects\\AppProjetoBiblioteca\\DataBase\\Livros.txt";
+    private final String path = "DataBase\\Livros.txt";
     private final File file = new File(path);
     LivroBeans livroBeans;
 

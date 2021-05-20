@@ -7,6 +7,7 @@ import com.projetointegrador.model.Livro;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author RafaelRodrigues1
@@ -83,17 +84,17 @@ public class LivroBeans {
     }
     
     public List<Livro> pesquisaLivro(String pesquisa){
-//        Set<Livro> setLivro = new HashSet<>();
-        List<Livro> listaFiltrada = new ArrayList<>();
+        //List<Livro> listaFiltrada = new ArrayList<>();
         List<Livro> listaLivro = listarLivros();
-        listaLivro.stream().filter((livro) -> 
-            (livro.getTitulo().toUpperCase().contains(pesquisa.toUpperCase()) || 
-            livro.getAutor().toUpperCase().contains(pesquisa.toUpperCase()) || 
-            livro.getEditora().toUpperCase().contains(pesquisa.toUpperCase()) || 
-            livro.getGenero().getGenero().toUpperCase().contains(pesquisa.toUpperCase()))).forEachOrdered(livro -> {
-                listaFiltrada.add(livro);
-            });
-//        listaFiltrada.addAll(setLivro);
+        List<Livro> listaFiltrada = listaLivro.stream()
+                        .filter((livro) -> (livro.getTitulo().toUpperCase().contains(pesquisa.toUpperCase()) || 
+                                    livro.getAutor().toUpperCase().contains(pesquisa.toUpperCase()) || 
+                                    livro.getEditora().toUpperCase().contains(pesquisa.toUpperCase()) || 
+                                    livro.getGenero().getGenero().toUpperCase().contains(pesquisa.toUpperCase())))
+                        .collect(Collectors.toList());
+                //forEachOrdered(livro -> {
+               // listaFiltrada.add(livro);
+          //  });
         Collections.sort(listaFiltrada);
         return listaFiltrada;
     }
