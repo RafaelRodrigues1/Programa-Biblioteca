@@ -46,35 +46,51 @@ public class LivroController {
     }
     
     public void apagaLivro(){
-        Integer row = livroView.getjTableLivros().getSelectedRow();
-        String cod = livroView.getjTableLivros().getValueAt(row, 0).toString();
-        if(Panes.confirma("Tem certeza que deseja apagar o livro:\n" + 
-                livroView.getjTableLivros().getValueAt(row, 1).toString())!=1){
-            if(livroBeans.apagaLivro(cod)){
-                Panes.mostraMsg("Livro Apagado");
-                tabelaDefault();
+        try{
+            if(livroView.getjTableLivros().getSelectedRow()>=0){
+                Integer row = livroView.getjTableLivros().getSelectedRow();
+                String cod = livroView.getjTableLivros().getValueAt(row, 0).toString();
+                if(Panes.confirma("Tem certeza que deseja apagar o livro:\n" + 
+                        livroView.getjTableLivros().getValueAt(row, 1).toString())!=1){
+                    if(livroBeans.apagaLivro(cod)){
+                        Panes.mostraMsg("Livro Apagado");
+                        tabelaDefault();
+                    }else{
+                        throw new Exception("Erro ao apagar");
+                    }
+                }else{            
+                }
             }else{
-                Panes.mostraMsg("Erro ao apagar");
+                throw new Exception("Selecione um livro para apagar");
             }
-        }else{            
+        }catch(Exception ex){
+            Panes.mostraMsg(ex.getMessage());
         }
     }
     
     public void alteraLivro(){
-        Integer row = livroView.getjTableLivros().getSelectedRow();
-        String cod = livroView.getjTableLivros().getValueAt(row, 0).toString();
-        if(Panes.confirma("Tem certeza que deseja alterar o livro:\n" + 
-                livroView.getjTableLivros().getValueAt(row, 1).toString() + "?")!=1){
-            if(livroBeans.alteraLivro(cod, livroView.getjTextTitulo().getText(), livroView.getjTextAutor().getText()
-                            , livroView.getjComboGenero().getSelectedItem().toString(), livroView.getjTextEditora().getText(),
-                            livroView.getjCheckAlugavel().isSelected(), livroView.getjTextEdicao().getText(),
-                            livroView.getjTextAnotacoes().getText())){
-                Panes.mostraMsg("Dados do livro alterados");
-                tabelaDefault();
+        try{    
+            if(livroView.getjTableLivros().getSelectedRow()>=0){
+                Integer row = livroView.getjTableLivros().getSelectedRow();
+                String cod = livroView.getjTableLivros().getValueAt(row, 0).toString();
+                if(Panes.confirma("Tem certeza que deseja alterar o livro:\n" + 
+                        livroView.getjTableLivros().getValueAt(row, 1).toString() + "?")!=1){
+                    if(livroBeans.alteraLivro(cod, livroView.getjTextTitulo().getText(), livroView.getjTextAutor().getText()
+                                    , livroView.getjComboGenero().getSelectedItem().toString(), livroView.getjTextEditora().getText(),
+                                    livroView.getjCheckAlugavel().isSelected(), livroView.getjTextEdicao().getText(),
+                                    livroView.getjTextAnotacoes().getText())){
+                        Panes.mostraMsg("Dados do livro alterados");
+                        tabelaDefault();
+                    }else{
+                        throw new Exception("Erro ao alterar");
+                    }
+                }else{           
+                }
             }else{
-                Panes.mostraMsg("Erro ao alterar");
+                throw new Exception("Selecione um livro para alterar");
             }
-        }else{           
+        }catch(Exception ex){
+            Panes.mostraMsg(ex.getMessage());
         }
     }
     

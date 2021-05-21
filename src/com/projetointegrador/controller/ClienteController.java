@@ -52,13 +52,37 @@ public class ClienteController {
         }
     }
     
+    public void apagaCliente(){
+        try{
+            if(clienteView.getjTableClientes().getSelectedRow()>=0){
+                Integer row = clienteView.getjTableClientes().getSelectedRow();
+                String nome = clienteView.getjTableClientes().getValueAt(row, 0).toString();
+                String email = clienteView.getjTableClientes().getValueAt(row, 2).toString();
+                if(Panes.confirma("Deseja apagar os dados do cliente: " + nome + "?")!=1){
+                    if(clienteBeans.apagaCliente(nome, email)){
+                        Panes.mostraMsg("Dados do cliente apagados");
+                        tabelaDefault();
+                    }else{
+                        throw new Exception("Erro ao apagar");
+                    }
+                }else{                    
+                }
+            }else{
+                throw new Exception("Selecione um cliente para apagar");
+            }
+            
+        }catch(Exception ex){
+            Panes.mostraMsg(ex.getMessage());
+        }
+    }
+    
     public void alteraCliente(){
         try{
             if(clienteView.getjTableClientes().getSelectedRow()>=0){
                 Integer row = clienteView.getjTableClientes().getSelectedRow();
                 String nome = clienteView.getjTableClientes().getValueAt(row, 0).toString();
                 String email = clienteView.getjTableClientes().getValueAt(row, 2).toString();
-                if(Panes.confirma("Certeza que deseja alterar o cliente: " + nome + "?")!=1){
+                if(Panes.confirma("Deseja alterar os dados do cliente: " + nome + "?")!=1){
                     if(verificaPadrao("Cpf não altera")){   
                         if(clienteBeans.alteraCliente(nome, email, clienteView.getjTextNome().getText(), 
                                 clienteView.getjFormattedTextData().getText(), clienteView.getjTextEmail().getText(),
@@ -74,7 +98,7 @@ public class ClienteController {
                 }else{           
                 }
             }else{
-                throw new Exception("Selecione um cliente");
+                throw new Exception("Selecione um cliente para alterar");
             }
         }catch(Exception ex){
             Panes.mostraMsg(ex.getMessage());
