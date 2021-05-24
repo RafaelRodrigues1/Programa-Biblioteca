@@ -1,7 +1,7 @@
 package com.projetointegrador.controller;
 
-import com.projetointegrador.beans.LoginBeans;
-import com.projetointegrador.model.Usuario;
+import com.projetointegrador.model.beans.LoginBeans;
+import com.projetointegrador.model.entities.Usuario;
 import com.projetointegrador.views.UsuarioView;
 import com.projetointegrador.views.LoginView;
 import com.projetointegrador.views.MainView;
@@ -18,19 +18,18 @@ public class LoginController {
 
     public LoginController(LoginView loginView) {
         this.loginView = loginView;
+        loginBeans = new LoginBeans(this);
     }
     
     public void entrar(){
         try{    
             String senha = getSenha();
             String login = loginView.getjTextLogin().getText();
-            if(!senha.isBlank() && !login.isBlank()){
-                loginBeans = new LoginBeans(this);
-                Usuario usuario = loginBeans.entrar(login, senha);
-                if(usuario!=null){
+            if(!senha.isBlank() && !login.isBlank()){                
+                if(loginBeans.entrar(login, senha)){
                     MainView mainView = new MainView();
                     mainView.setVisible(true);
-                    mainView.getMainController().setUsuario(usuario);
+                    mainView.getMainController().setUsuario(login);
                     loginView.setVisible(false);
                 }else{
                     throw new Exception("Usuário ou senha inválidos");
@@ -45,7 +44,7 @@ public class LoginController {
     
     public void cadastrar(){        
         try{   
-            if(loginView.getjTextLogin().getText().equals("admin") && getSenha().equals("123456")){
+            if(loginView.getjTextLogin().getText().equals("admin") && getSenha().equals("admin123456")){
                 cadastroUsuarioView = new UsuarioView();
                 cadastroUsuarioView.setVisible(true);
             }else{

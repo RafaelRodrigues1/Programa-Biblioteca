@@ -1,14 +1,14 @@
 package com.projetointegrador.controller;
 
-import com.projetointegrador.beans.ClienteBeans;
-import com.projetointegrador.model.Cliente;
+import com.projetointegrador.model.beans.ClienteBeans;
+import com.projetointegrador.model.entities.Cliente;
 import com.projetointegrador.views.ClienteView;
 import com.projetointegrador.views.Panes;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.table.DefaultTableModel;
+import java.time.format.DateTimeFormatter;
 
 /**
  * @author RafaelRodrigues1
@@ -144,7 +144,7 @@ public class ClienteController {
     public void preencheTabela(List<Cliente> listaCliente){
         DefaultTableModel tableModel = (DefaultTableModel) clienteView.getjTableClientes().getModel();
         tableModel.setNumRows(0);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");        
+        DateTimeFormatter sdf = DateTimeFormatter.ofPattern("dd/MM/yyyy");        
         listaCliente.forEach(cliente ->{
             String data = sdf.format(cliente.getDataNascimento());
             tableModel.addRow(new Object[]{cliente.getNome(), data, cliente.getEmail(), 

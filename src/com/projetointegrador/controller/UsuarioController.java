@@ -1,12 +1,15 @@
 package com.projetointegrador.controller;
 
-import com.projetointegrador.beans.UsuarioBeans;
+import com.projetointegrador.model.beans.UsuarioBeans;
 import com.projetointegrador.views.UsuarioView;
 import com.projetointegrador.views.LoginView;
 import com.projetointegrador.views.Panes;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import static javax.swing.text.html.HTML.Tag.P;
 
 /**
  * @author RafaelRodrigues1
@@ -23,29 +26,34 @@ public class UsuarioController {
     
     public void cadastrar(){
         try{
-            List<String> listaSenhas = getSenhas();           
-            if(!usuarioView.getjTextNome().getText().isBlank() && 
-                    !usuarioView.getjFormattedTextData().getText().isBlank() &&
-                    !usuarioView.getjTextLogin().getText().isBlank() &&
-                    !listaSenhas.get(0).isBlank() && !listaSenhas.get(0).isBlank()){
-                if(verificaSenhas()){
-                    usuarioBeans = new UsuarioBeans(this);
-                    if(usuarioBeans.cadastrar(usuarioView.getjTextLogin().getText().trim(), listaSenhas.get(0),
-                            usuarioView.getjTextNome().getText(), 
-                            usuarioView.getjFormattedTextData().getText())){
-                        Panes.mostraMsg("Usuário "+ usuarioView.getjTextLogin().getText() +" cadastrado com sucesso");
-                        usuarioView.setVisible(false);
-                        loginView.setVisible(true);
+            List<String> listaSenhas = getSenhas(); 
+            Pattern data = Pattern.compile("\\d{2}/\\d{2}/\\d{4}");
+            Matcher matchData = data.matcher(usuarioView.getjFormattedTextData().getText());
+            if(matchData.find()){
+                if(!usuarioView.getjTextNome().getText().isBlank() && 
+                        !usuarioView.getjFormattedTextData().getText().isBlank() &&
+                        !usuarioView.getjTextLogin().getText().isBlank() &&
+                        !listaSenhas.get(0).isBlank() && !listaSenhas.get(0).isBlank()){
+                    if(verificaSenhas()){
+                        usuarioBeans = new UsuarioBeans(this);
+                        if(usuarioBeans.cadastrar(usuarioView.getjTextLogin().getText().trim(), listaSenhas.get(0),
+                                usuarioView.getjTextNome().getText(), 
+                                usuarioView.getjFormattedTextData().getText())){
+                            Panes.mostraMsg("Usuário "+ usuarioView.getjTextLogin().getText() +" cadastrado com sucesso");
+                            usuarioView.setVisible(false);
+                            loginView.setVisible(true);
+                        }else{
+                            usuarioView.getjLabelAvisoUsuario().setText("*Usuário indisponível");
+                        }
                     }else{
-                        
-                        usuarioView.getjLabelAvisoUsuario().setText("*Usuário indisponível");
+                        throw new Exception("Campos de senha não coindidem");
                     }
                 }else{
-                    throw new Exception("Campos de senha não coindidem");
-                }
+                    throw new Exception("Todos os campos são obrigatórios");
+                } 
             }else{
-                throw new Exception("Todos os campos são obrigatórios");
-            }         
+                throw new Exception("Data inválida");
+            }
         }catch(Exception ex){
             Panes.mostraMsg(ex.getMessage());
         }

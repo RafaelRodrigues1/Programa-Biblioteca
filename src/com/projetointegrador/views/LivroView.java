@@ -1,7 +1,7 @@
 package com.projetointegrador.views;
 
 import com.projetointegrador.controller.LivroController;
-import com.projetointegrador.model.Genero;
+import com.projetointegrador.model.entities.Genero;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -16,10 +16,9 @@ import javax.swing.JTextPane;
  */
 public class LivroView extends javax.swing.JFrame {
 
-    /**
-     * Creates new form CadastroLivro
-     */
+    
     private final LivroController livroController;
+    
     public LivroView() {
         initComponents();
         listaGenero();

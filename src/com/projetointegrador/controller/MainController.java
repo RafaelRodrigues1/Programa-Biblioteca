@@ -1,7 +1,7 @@
 package com.projetointegrador.controller;
 
 import com.projetointegrador.views.MainView;
-import com.projetointegrador.model.Usuario;
+import com.projetointegrador.model.entities.Usuario;
 import com.projetointegrador.views.ClienteView;
 import com.projetointegrador.views.LivroView;
 import com.projetointegrador.views.LoginView;
@@ -12,7 +12,7 @@ public class MainController {
     
     
     private MainView mainView;
-    private Usuario usuario;
+    //private Usuario usuario;
     private LoginView loginView;
     private LivroView livroView;
     private ClienteView clienteView;
@@ -21,9 +21,9 @@ public class MainController {
         this.mainView = mainView;
     }
     
-    public void setUsuario(Usuario usuario){
-        this.usuario = usuario;
-        mainView.getjLabelNomeUsuario().setText("Usuário: " + usuario.getLogin());
+    public void setUsuario(String usuario){ //implementar no construtor o recebimento do usuário no mainview
+        //this.usuario = usuario;
+        mainView.getjLabelNomeUsuario().setText("Usuário: " + usuario);
     }
     
     public void logOut(){

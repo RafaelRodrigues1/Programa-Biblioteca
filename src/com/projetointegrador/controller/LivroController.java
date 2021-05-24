@@ -1,7 +1,7 @@
 package com.projetointegrador.controller;
 
-import com.projetointegrador.beans.LivroBeans;
-import com.projetointegrador.model.Livro;
+import com.projetointegrador.model.beans.LivroBeans;
+import com.projetointegrador.model.entities.Livro;
 import com.projetointegrador.views.LivroView;
 import com.projetointegrador.views.MainView;
 import com.projetointegrador.views.Panes;
