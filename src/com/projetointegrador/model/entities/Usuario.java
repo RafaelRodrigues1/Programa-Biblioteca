@@ -16,6 +16,11 @@ public class Usuario extends Pessoa {
         this.login = login;
         this.senha = senha;
     }
+    
+    public Usuario(String login, String senha) {
+        this.login = login;
+        this.senha = senha;
+    }
 
     public String getLogin() {
         return login;

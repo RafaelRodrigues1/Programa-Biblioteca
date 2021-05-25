@@ -1,4 +1,4 @@
-package com.database.connection;
+package com.projetointegrador.database.connection;
 
 /**
  * @author RafaelRodrigues1

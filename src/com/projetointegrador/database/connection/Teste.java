@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.database.connection;
+package com.projetointegrador.database.connection;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

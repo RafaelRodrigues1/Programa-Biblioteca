@@ -252,6 +252,7 @@ public final class UsuarioView extends javax.swing.JFrame {
 
     private void jTextLoginKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextLoginKeyReleased
         usuarioController.apagaEspacoLogin();
+        usuarioController.verificaUsuario();
     }//GEN-LAST:event_jTextLoginKeyReleased
 
     /**

@@ -83,14 +83,18 @@ public class ClienteController {
                 String nome = clienteView.getjTableClientes().getValueAt(row, 0).toString();
                 String email = clienteView.getjTableClientes().getValueAt(row, 2).toString();
                 if(Panes.confirma("Deseja alterar os dados do cliente: " + nome + "?")!=1){
-                    if(verificaPadrao("Cpf não altera")){   
-                        if(clienteBeans.alteraCliente(nome, email, clienteView.getjTextNome().getText(), 
-                                clienteView.getjFormattedTextData().getText(), clienteView.getjTextEmail().getText(),
-                                clienteView.getjTextEndereco().getText(), clienteView.getjFormattedTextTelefone().getText())){
-                        Panes.mostraMsg("Dados do cliente alterados");
-                        tabelaDefault();
+                    if(verificaPadrao("Cpf não altera")){  
+                        if(email.equals(clienteView.getjTextEmail().getText())){
+                            if(clienteBeans.alteraCliente(email, clienteView.getjTextNome().getText(), 
+                                    clienteView.getjFormattedTextData().getText(),
+                                    clienteView.getjTextEndereco().getText(), clienteView.getjFormattedTextTelefone().getText())){
+                            Panes.mostraMsg("Dados do cliente alterados");
+                            tabelaDefault();
+                            }else{
+                                throw new Exception("Erro ao alterar");
+                            }
                         }else{
-                            throw new Exception("Erro ao alterar");
+                            throw new Exception("Campos email e CPF são inalteráveis");
                         }
                     }else{
                         throw new Exception("Dados em formato inválido");
@@ -178,5 +182,9 @@ public class ClienteController {
     
     public void emailToLowCase(){
         clienteView.getjTextEmail().setText(clienteView.getjTextEmail().getText().toLowerCase());
+    }
+    
+    public void imprimeRelatorioCliente(){
+        clienteBeans.imprimeRelatorioCliente();
     }
 }

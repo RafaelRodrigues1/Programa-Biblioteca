@@ -44,7 +44,7 @@ public class LoginController {
     
     public void cadastrar(){        
         try{   
-            if(loginView.getjTextLogin().getText().equals("admin") && getSenha().equals("admin123456")){
+            if(loginView.getjTextLogin().getText().equals("admin") && getSenha().equals("123admin456")){
                 cadastroUsuarioView = new UsuarioView();
                 cadastroUsuarioView.setVisible(true);
             }else{

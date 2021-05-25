@@ -43,7 +43,7 @@ public class MainView extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

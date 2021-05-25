@@ -25,3 +25,4 @@ Harry Potter e o príncipe mestiço;Rowling, J.K;AVENTURA;Atica;;;Sim;Sim;1024
 O Pequeno Príncipe;Saint-Exupéry, Antoine de ;LITERATURA_INFANTIL;Record;;;Não;Não;1025
 O Banquete;Platão;CLÁSSICO;L&PM pocket;;;Não;Não;1026
 Genealogia da moral;Nietzsche, Friedrich;ENSAIO;Editora Atica;3° edição;;Sim;Sim;1027
+A cabana;Young, William P.;DRAMA;Editora Record;;;Sim;Sim;1028

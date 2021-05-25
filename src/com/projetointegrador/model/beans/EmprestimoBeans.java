@@ -11,7 +11,7 @@ import java.time.temporal.ChronoUnit;
  */
 public class EmprestimoBeans {
     
-    private final Double MULTA_DIA =5d;
+    private final Double MULTA_DIA = 5d;
     private EmprestimoController emprestimoController;
     private EmprestimoDao emprestimoDao;
 

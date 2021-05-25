@@ -24,14 +24,8 @@ public class LoginBeans {
     
     public Boolean entrar(String login, String senha){
         try{
-            List<Usuario> listaUsuario = usuarioDao.listarUsuario();
-            if(!listaUsuario.isEmpty()){
-                return listaUsuario
-                        .stream()
-                        .anyMatch(usuario -> usuario.getLogin().equals(login) && usuario.getSenha().equals(senha));
-            }else{
-                throw new Exception();
-            }
+            Usuario usuario = new Usuario(login, senha);
+            return usuarioDao.autenticaUsuario(usuario);
         }catch(Exception ex){
             return false; 
         }

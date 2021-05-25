@@ -5,6 +5,7 @@ import com.projetointegrador.model.dao.UsuarioDao;
 import com.projetointegrador.model.entities.Usuario;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 
 /**
@@ -26,5 +27,12 @@ public class UsuarioBeans {
         LocalDate dataNascimento = LocalDate.parse(data, dtf);
         Usuario usuario = new Usuario(login, senha, nome, dataNascimento);
         return usuarioDao.cadastrar(usuario);
+    }
+    
+    public Boolean verificaUsuario(String login){
+        List<Usuario> listaUsuario = usuarioDao.listarUsuario();
+        return !listaUsuario
+                        .stream()
+                        .anyMatch(usuario -> usuario.getLogin().toUpperCase().equals(login.toUpperCase()));
     }
 }

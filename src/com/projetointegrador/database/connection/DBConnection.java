@@ -1,4 +1,4 @@
-package com.database.connection;
+package com.projetointegrador.database.connection;
 
 import java.sql.Connection;
 import java.io.FileInputStream;
@@ -57,9 +57,9 @@ public class DBConnection {
         }
         closeConnection(sta, con);
     }
-
+    
     private static Properties getProperties(){
-        try(FileInputStream fis = new FileInputStream("src\\com\\database\\connection\\DBConnection.properties")){
+        try(FileInputStream fis = new FileInputStream("src\\com\\projetointegrador\\database\\connection\\DBConnection.properties")){
             Properties prop = new Properties();
             prop.load(fis);
             return prop;

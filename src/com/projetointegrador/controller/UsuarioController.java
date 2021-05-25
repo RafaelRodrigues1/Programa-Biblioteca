@@ -22,6 +22,7 @@ public class UsuarioController {
 
     public UsuarioController(UsuarioView usuarioview) {
         this.usuarioView = usuarioview;
+        usuarioBeans = new UsuarioBeans(this);
     }
     
     public void cadastrar(){
@@ -35,7 +36,6 @@ public class UsuarioController {
                         !usuarioView.getjTextLogin().getText().isBlank() &&
                         !listaSenhas.get(0).isBlank() && !listaSenhas.get(0).isBlank()){
                     if(verificaSenhas()){
-                        usuarioBeans = new UsuarioBeans(this);
                         if(usuarioBeans.cadastrar(usuarioView.getjTextLogin().getText().trim(), listaSenhas.get(0),
                                 usuarioView.getjTextNome().getText(), 
                                 usuarioView.getjFormattedTextData().getText())){
@@ -43,7 +43,7 @@ public class UsuarioController {
                             usuarioView.setVisible(false);
                             loginView.setVisible(true);
                         }else{
-                            usuarioView.getjLabelAvisoUsuario().setText("*Usuário indisponível");
+                            Panes.mostraMsg("Usuário indisponível");
                         }
                     }else{
                         throw new Exception("Campos de senha não coindidem");
@@ -84,6 +84,21 @@ public class UsuarioController {
     
     public void apagaEspacoLogin(){
         usuarioView.getjTextLogin().setText(usuarioView.getjTextLogin().getText().trim());
+    }
+    
+    public void verificaUsuario(){
+        if(!usuarioView.getjTextLogin().getText().isBlank()){
+            if(usuarioBeans.verificaUsuario(usuarioView.getjTextLogin().getText())){
+                usuarioView.getjLabelAvisoUsuario().setForeground(Color.BLUE);
+                usuarioView.getjLabelAvisoUsuario().setText("*Usuário disponível");
+            }else{
+                usuarioView.getjLabelAvisoUsuario().setForeground(Color.RED);
+                usuarioView.getjLabelAvisoUsuario().setText("*Usuário indisponível");
+            }
+        }else{
+            usuarioView.getjLabelAvisoUsuario().setText("");
+        }
+        
     }
     
     private List<String> getSenhas(){
