@@ -14,15 +14,13 @@ public class Livro implements Comparable<Livro> {
     private String edicao;
     private String anotacoes;   
     private Boolean alugavel;
-    private Boolean alugado;
-
-    private final Integer codigo;
-    private static Integer codigos=1000;
+    private Boolean disponivel;
+    private Boolean restricaoEtaria;
+    private Integer codigo;
 
         //Construtor para dados vindos do banco
-
-    public Livro(String titulo, String autor, Genero genero, String editora, String edicao, 
-            String anotacoes, Boolean alugavel, Boolean alugado, Integer codigo) {
+    public Livro(Integer codigo, String titulo, String autor, Genero genero, String editora, String edicao, 
+            String anotacoes, Boolean alugavel, Boolean disponivel, Boolean restricaoEtaria) {
         this.titulo = titulo;
         this.autor = autor;
         this.genero = genero;
@@ -30,26 +28,24 @@ public class Livro implements Comparable<Livro> {
         this.edicao = edicao;
         this.anotacoes = anotacoes;
         this.alugavel = alugavel;
-        this.alugado = alugado;
+        this.disponivel = disponivel;
+        this.restricaoEtaria = restricaoEtaria;
         this.codigo = codigo;
-        codigos=codigo;
     }
     
     
         //Construtor para cadastro
-    public Livro(String titulo, String autor, Genero genero, String editora, Boolean alugavel) {
+    public Livro(String titulo, String autor, Genero genero, String editora, String edicao, String anotacoes,
+            Boolean alugavel, Boolean restricaoEtaria) {
         this.titulo = titulo;
         this.autor = autor;
         this.genero = genero;
         this.editora = editora; 
-        codigos++;
-        this.codigo = codigos;
+        this.edicao = edicao;
+        this.anotacoes = anotacoes;
         this.alugavel = alugavel; 
-        if(alugavel){
-            this.alugado = true;
-        }else{
-            this.alugado = false;
-        }
+        this.disponivel = alugavel;
+        this.restricaoEtaria = restricaoEtaria;
     } 
     
     @Override
@@ -136,18 +132,12 @@ public class Livro implements Comparable<Livro> {
         this.anotacoes = anotacoes;
     }
 
-    public String getAlugavel() {
-        if(alugavel){
-            return "Sim";
-        }else{
-            return "Não";
-        }
+    public Boolean getAlugavel() {
+        return alugavel;
     }
 
     public void setAlugavel(Boolean alugavel) {
-        if(!alugavel){
-            this.alugado=false;
-        }
+        this.disponivel = alugavel;
         this.alugavel = alugavel;
     }
 
@@ -155,15 +145,23 @@ public class Livro implements Comparable<Livro> {
         return codigo;
     }  
 
-    public String getAlugado() {
-        if(alugado){
-            return "Sim";
-        }else{
-            return "Não";
-        }
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
     }
 
-    public void setAlugado(Boolean alugado) {
-        this.alugado = alugado;
+    public Boolean getDisponivel() {
+        return disponivel;
+    }
+
+    public void setDisponivel(Boolean disponivel) {
+        this.disponivel = disponivel;
+    }
+
+    public Boolean getRestricaoEtaria() {
+        return restricaoEtaria;
+    }
+
+    public void setRestricaoEtaria(Boolean restricaoEtaria) {
+        this.restricaoEtaria = restricaoEtaria;
     }
 }

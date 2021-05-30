@@ -4,11 +4,13 @@ import com.projetointegrador.model.beans.ClienteBeans;
 import com.projetointegrador.model.entities.Cliente;
 import com.projetointegrador.views.ClienteView;
 import com.projetointegrador.views.Panes;
+import java.awt.Color;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.table.DefaultTableModel;
 import java.time.format.DateTimeFormatter;
+import javax.swing.JTabbedPane;
 
 /**
  * @author RafaelRodrigues1
@@ -56,10 +58,10 @@ public class ClienteController {
         try{
             if(clienteView.getjTableClientes().getSelectedRow()>=0){
                 Integer row = clienteView.getjTableClientes().getSelectedRow();
-                String nome = clienteView.getjTableClientes().getValueAt(row, 0).toString();
-                String email = clienteView.getjTableClientes().getValueAt(row, 2).toString();
+                Integer id = (int) clienteView.getjTableClientes().getValueAt(row, 0);
+                String nome = clienteView.getjTableClientes().getValueAt(row, 1).toString();
                 if(Panes.confirma("Deseja apagar os dados do cliente: " + nome + "?")!=1){
-                    if(clienteBeans.apagaCliente(nome, email)){
+                    if(clienteBeans.apagaCliente(id)){
                         Panes.mostraMsg("Dados do cliente apagados");
                         tabelaDefault();
                     }else{
@@ -80,21 +82,19 @@ public class ClienteController {
         try{
             if(clienteView.getjTableClientes().getSelectedRow()>=0){
                 Integer row = clienteView.getjTableClientes().getSelectedRow();
-                String nome = clienteView.getjTableClientes().getValueAt(row, 0).toString();
-                String email = clienteView.getjTableClientes().getValueAt(row, 2).toString();
+                Integer id = (int) clienteView.getjTableClientes().getValueAt(row, 0);
+                String nome = clienteView.getjTableClientes().getValueAt(row, 1).toString();
                 if(Panes.confirma("Deseja alterar os dados do cliente: " + nome + "?")!=1){
                     if(verificaPadrao("Cpf não altera")){  
-                        if(email.equals(clienteView.getjTextEmail().getText())){
-                            if(clienteBeans.alteraCliente(email, clienteView.getjTextNome().getText(), 
-                                    clienteView.getjFormattedTextData().getText(),
-                                    clienteView.getjTextEndereco().getText(), clienteView.getjFormattedTextTelefone().getText())){
-                            Panes.mostraMsg("Dados do cliente alterados");
-                            tabelaDefault();
-                            }else{
-                                throw new Exception("Erro ao alterar");
-                            }
+                        if(clienteBeans.alteraCliente(id, clienteView.getjTextEmail().getText(), 
+                                clienteView.getjTextNome().getText(), 
+                                clienteView.getjFormattedTextData().getText(),
+                                clienteView.getjTextEndereco().getText(), 
+                                clienteView.getjFormattedTextTelefone().getText())){
+                        Panes.mostraMsg("Dados do cliente alterados");
+                        tabelaDefault();
                         }else{
-                            throw new Exception("Campos email e CPF são inalteráveis");
+                            throw new Exception("Erro ao alterar");
                         }
                     }else{
                         throw new Exception("Dados em formato inválido");
@@ -146,12 +146,13 @@ public class ClienteController {
     }
     
     public void preencheTabela(List<Cliente> listaCliente){
+        JTabbedPane jTabbedPane = new JTabbedPane();
         DefaultTableModel tableModel = (DefaultTableModel) clienteView.getjTableClientes().getModel();
         tableModel.setNumRows(0);
-        DateTimeFormatter sdf = DateTimeFormatter.ofPattern("dd/MM/yyyy");        
+        DateTimeFormatter sdf = DateTimeFormatter.ofPattern("dd/MM/yyyy"); 
         listaCliente.forEach(cliente ->{
             String data = sdf.format(cliente.getDataNascimento());
-            tableModel.addRow(new Object[]{cliente.getNome(), data, cliente.getEmail(), 
+            tableModel.addRow(new Object[]{cliente.getId(), cliente.getNome(), data, cliente.getEmail(), 
                 cliente.getTelefone(), cliente.getNumeroLivros()});
             });
     }
@@ -167,10 +168,19 @@ public class ClienteController {
     
     public void selecionaCliente(){
         Integer row = clienteView.getjTableClientes().getSelectedRow();
-        String nome = clienteView.getjTableClientes().getValueAt(row, 0).toString();
-        String data = clienteView.getjTableClientes().getValueAt(row, 1).toString();
-        String email = clienteView.getjTableClientes().getValueAt(row, 2).toString();
-        Cliente cliente = clienteBeans.selecionaCliente(nome, data, email);
+        Integer id = Integer.parseInt(clienteView.getjTableClientes().getValueAt(row, 0).toString());
+        String data = clienteView.getjTableClientes().getValueAt(row, 2).toString();
+        Cliente cliente = clienteBeans.selecionaCliente(id);
+        
+                //Muda cor de seleção
+        if(!cliente.getLiberado()){
+            clienteView.getjTableClientes().setSelectionBackground(Color.RED.darker());
+            clienteView.getjTableClientes().setSelectionForeground(Color.WHITE);
+        }else{
+            clienteView.getjTableClientes().setSelectionBackground(Color.BLUE.darker());
+            clienteView.getjTableClientes().setSelectionForeground(Color.WHITE);
+        }
+        
         String cpf = cliente.getCpf().substring(0, 3).concat("******").concat(cliente.getCpf().substring(12, 14));
         clienteView.getjTextNome().setText(cliente.getNome());
         clienteView.getjFormattedTextData().setText(data);

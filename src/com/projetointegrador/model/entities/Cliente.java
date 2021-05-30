@@ -13,16 +13,21 @@ public class Cliente extends Pessoa  {
     private String email;
     private String cpf;
     private Integer numeroLivros;
+    private Integer id;
+    private Boolean liberado;
 
-    public Cliente(String nome, LocalDate dataNascimento, String email, String cpf, String endereco, String telefone, Integer numeroLivros) {
+    public Cliente(Integer id, String nome, LocalDate dataNascimento, String email, 
+            String cpf, String endereco, String telefone, Integer numeroLivros, Boolean liberado) {
         super(nome, dataNascimento);
+        this.id = id;
         this.endereco = endereco;
         this.telefone = telefone;
         this.email = email;
         this.cpf = cpf;
         this.numeroLivros = numeroLivros;
+        this.liberado = liberado;
     }
-
+        //Construtor para cadastro
     public Cliente(String nome, LocalDate dataNascimento, String email, String cpf, String endereco, String telefone) {
         super(nome, dataNascimento);
         this.endereco = endereco;
@@ -30,7 +35,20 @@ public class Cliente extends Pessoa  {
         this.email = email;
         this.cpf = cpf;
     }
+        //Construtor para alteração
+    public Cliente(Integer id, String nome, LocalDate dataNascimento, String email, String cpf, String endereco, String telefone) {
+        super(nome, dataNascimento);
+        this.id = id;
+        this.endereco = endereco;
+        this.telefone = telefone;
+        this.email = email;
+        this.cpf = cpf;
+    }
 
+    public Integer getId() {
+        return id;
+    }
+    
     @Override
     public int compareTo(Pessoa o) {
         return this.getNome().compareTo(o.getNome());
@@ -95,9 +113,17 @@ public class Cliente extends Pessoa  {
         return numeroLivros;
     }
 
+    public Boolean getLiberado() {
+        return liberado;
+    }
+
+    public void setLiberado(Boolean liberado) {
+        this.liberado = liberado;
+    }
+    
     @Override
     public String toString() {
-        return "Cliente{" + "telefone=" + telefone + ", email=" + email + ", cpf=" + cpf + '}';
+        return "Cliente: " + super.getNome() + ", email=" + email + ", cpf=" + cpf + '}';
     }
     
     

@@ -29,7 +29,8 @@ public class LivroController {
                     !livroView.getjTextEditora().getText().isBlank()){
                 if(livroBeans.cadastrar(livroView.getjTextTitulo().getText(), livroView.getjTextAutor().getText()
                         , livroView.getjComboGenero().getSelectedItem().toString(), livroView.getjTextEditora().getText(),
-                        livroView.getjCheckAlugavel().isSelected(), livroView.getjTextEdicao().getText(),
+                        livroView.getjCheckAlugavel().isSelected(), livroView.getjCheckRestricaoEtaria().isSelected(), 
+                        livroView.getjTextEdicao().getText(),
                         livroView.getjTextAnotacoes().getText())){
                     Panes.mostraMsg("Livro cadastrado!");
                     List<Livro> lista = livroBeans.listarLivros();
@@ -49,7 +50,7 @@ public class LivroController {
         try{
             if(livroView.getjTableLivros().getSelectedRow()>=0){
                 Integer row = livroView.getjTableLivros().getSelectedRow();
-                String cod = livroView.getjTableLivros().getValueAt(row, 0).toString();
+                Integer cod = (int)livroView.getjTableLivros().getValueAt(row, 0);
                 if(Panes.confirma("Tem certeza que deseja apagar o livro:\n" + 
                         livroView.getjTableLivros().getValueAt(row, 1).toString())!=1){
                     if(livroBeans.apagaLivro(cod)){
@@ -72,13 +73,15 @@ public class LivroController {
         try{    
             if(livroView.getjTableLivros().getSelectedRow()>=0){
                 Integer row = livroView.getjTableLivros().getSelectedRow();
-                String cod = livroView.getjTableLivros().getValueAt(row, 0).toString();
+                Integer cod = (int)livroView.getjTableLivros().getValueAt(row, 0);
                 if(Panes.confirma("Tem certeza que deseja alterar o livro:\n" + 
                         livroView.getjTableLivros().getValueAt(row, 1).toString() + "?")!=1){
-                    if(livroBeans.alteraLivro(cod, livroView.getjTextTitulo().getText(), livroView.getjTextAutor().getText()
-                                    , livroView.getjComboGenero().getSelectedItem().toString(), livroView.getjTextEditora().getText(),
-                                    livroView.getjCheckAlugavel().isSelected(), livroView.getjTextEdicao().getText(),
-                                    livroView.getjTextAnotacoes().getText())){
+                    if(livroBeans.alteraLivro(cod, livroView.getjTextTitulo().getText(), 
+                            livroView.getjTextAutor().getText(), 
+                            livroView.getjComboGenero().getSelectedItem().toString(), 
+                            livroView.getjTextEditora().getText(), livroView.getjTextEdicao().getText(), 
+                            livroView.getjTextAnotacoes().getText(), livroView.getjCheckAlugavel().isSelected(), 
+                            livroView.getjCheckRestricaoEtaria().isSelected())){
                         Panes.mostraMsg("Dados do livro alterados");
                         tabelaDefault();
                     }else{
@@ -112,15 +115,23 @@ public class LivroController {
         DefaultTableModel tableModel = (DefaultTableModel) livroView.getjTableLivros().getModel();
         tableModel.setNumRows(0);
         lista.forEach(livro -> {
+            String alugavel = "Não";
+            String disponivel = "Não";
+            if(livro.getAlugavel()){
+                alugavel = "Sim";
+            }
+            if(livro.getDisponivel()){
+                disponivel = "Sim";
+            }
             tableModel.addRow(new Object[]{livro.getCodigo(), livro.getTitulo(), livro.getAutor(),
                 livro.getEditora(), livro.getEdicao(), livro.getGenero().getGenero(), 
-                livro.getAlugavel(), livro.getAnotacoes(), livro.getAlugado()});
+                alugavel, livro.getAnotacoes(), disponivel});
         });
     }
     
     public void selecionaLivro(){
         Integer row = livroView.getjTableLivros().getSelectedRow();
-        String cod = livroView.getjTableLivros().getValueAt(row, 0).toString();
+        Integer cod = (int)livroView.getjTableLivros().getValueAt(row, 0);
         Livro livroSelecionado = livroBeans.selecionaLivro(cod);
         livroView.getjTextTitulo().setText(livroSelecionado.getTitulo());
         livroView.getjTextAutor().setText(livroSelecionado.getAutor());
@@ -128,13 +139,7 @@ public class LivroController {
         livroView.getjTextEdicao().setText(livroSelecionado.getEdicao());
         livroView.getjTextAnotacoes().setText(livroSelecionado.getAnotacoes());
         livroView.getjComboGenero().setSelectedItem(livroSelecionado.getGenero().getGenero());
-        if(livroSelecionado.getAlugavel().equals("Sim")){
-            livroView.getjCheckAlugavel().setSelected(true);
-        }else{
-        livroView.getjCheckAlugavel().setSelected(false);
-        }
+        livroView.getjCheckAlugavel().setSelected(livroSelecionado.getAlugavel());
+        livroView.getjCheckRestricaoEtaria().setSelected(livroSelecionado.getRestricaoEtaria());
     }
-    
-    
-
 }

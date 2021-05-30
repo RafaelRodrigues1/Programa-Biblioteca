@@ -1,4 +1,0 @@
-Alessandra Lima de Oliveira;23/02/1992;alessandra@hotmail.com;562.325.658-98;Rua dos alfineteiros, n°14;(85)9 9654-5485;0
-Rafael Rodrigues da Silva;27/10/1994;rafael@hotmail.com;156.245.897-85;Rua Bonito de Santa Fé, n144;(78)9 8578-6428;0
-Rebeca Santos Cavalcanti;15/08/2008;rebecasantos@gmail.com;412.354.778-95;BR-101 km42;(81)5 4554-7854;0
-Robson Silva Castro;25/10/1986;robsonsilva@gmail.com;654.543.216-54;Rua das neves, n°28;(81)9 8694-6895;0
