@@ -22,12 +22,8 @@ public class LoginBeans {
         usuarioDao = new UsuarioDao(this);
     }
     
-    public Boolean entrar(String login, String senha){
-        try{
-            Usuario usuario = new Usuario(login, senha);
-            return usuarioDao.autenticaUsuario(usuario);
-        }catch(Exception ex){
-            return false; 
-        }
+    public Boolean entrar(Usuario usuario){
+        return usuarioDao.autenticaUsuario(usuario);
+        
     }
 }

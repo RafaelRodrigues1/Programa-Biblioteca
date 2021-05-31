@@ -25,11 +25,11 @@ public class LoginController {
         try{    
             String senha = getSenha();
             String login = loginView.getjTextLogin().getText();
-            if(!senha.isBlank() && !login.isBlank()){                
-                if(loginBeans.entrar(login, senha)){
-                    MainView mainView = new MainView();
+            if(!senha.isBlank() && !login.isBlank()){     
+                Usuario usuario = new Usuario(login, senha);
+                if(loginBeans.entrar(usuario)){
+                    MainView mainView = new MainView(usuario);
                     mainView.setVisible(true);
-                    mainView.getMainController().setUsuario(login);
                     loginView.setVisible(false);
                 }else{
                     throw new Exception("Usuário ou senha inválidos");

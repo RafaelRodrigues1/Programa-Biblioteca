@@ -2,6 +2,7 @@ package com.projetointegrador.views;
 
 import com.projetointegrador.controller.LivroController;
 import com.projetointegrador.model.entities.Genero;
+import com.projetointegrador.model.entities.Usuario;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -15,9 +16,9 @@ import javax.swing.JTextPane;
  * @author RafaelRodrigues1
  */
 public class LivroView extends javax.swing.JFrame {
-
     
     private final LivroController livroController;
+    private Usuario usuario;
     
     public LivroView() {
         initComponents();
@@ -300,9 +301,9 @@ public class LivroView extends javax.swing.JFrame {
                                 .addComponent(jLabel4))
                             .addComponent(jComboGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckAlugavel)
-                            .addComponent(jCheckRestricaoEtaria))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCheckRestricaoEtaria)
+                            .addComponent(jCheckAlugavel))
                         .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10)
@@ -420,8 +421,15 @@ public class LivroView extends javax.swing.JFrame {
     public JTextField getjTextPesquisa() {
         return jTextPesquisa;
     }
-    
-    
+
+    public final Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+        livroController.setUsuario(usuario);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAlterar;

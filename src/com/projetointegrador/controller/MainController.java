@@ -2,28 +2,32 @@ package com.projetointegrador.controller;
 
 import com.projetointegrador.views.MainView;
 import com.projetointegrador.model.entities.Usuario;
+import com.projetointegrador.views.AtividadeView;
 import com.projetointegrador.views.ClienteView;
 import com.projetointegrador.views.LivroView;
 import com.projetointegrador.views.LoginView;
+import com.projetointegrador.views.Panes;
 /**
  * @author RafaelRodrigues1
  */
 public class MainController {
     
-    
+    private static final Usuario admin = new Usuario("admin", "123admin456");
     private MainView mainView;
-    //private Usuario usuario;
+    private Usuario usuario;
     private LoginView loginView;
     private LivroView livroView;
     private ClienteView clienteView;
+    private AtividadeView atividadeView;
 
-    public MainController(MainView mainView) {
+    public MainController(MainView mainView, Usuario usuario) {
         this.mainView = mainView;
+        this.usuario = usuario;
+        usuarioTela();
     }
     
-    public void setUsuario(String usuario){ //implementar no construtor o recebimento do usuário no mainview
-        //this.usuario = usuario;
-        mainView.getjLabelNomeUsuario().setText("Usuário: " + usuario);
+    private void usuarioTela(){ 
+        mainView.getjLabelNomeUsuario().setText("Usuário: " + usuario.getLogin());
     }
     
     public void logOut(){
@@ -34,11 +38,33 @@ public class MainController {
     
     public void abrirLivros(){
         livroView = new LivroView();
+        livroView.setUsuario(usuario);
         livroView.setVisible(true);
+        mainView.setVisible(false);
     }
     
     public void abrirClientes(){
         clienteView = new ClienteView();
+        clienteView.setUsuario(usuario);
         clienteView.setVisible(true);
+        mainView.setVisible(false);
+    }
+    
+    public void abrirAtividades(){
+        if(usuario.equals(admin)){
+            atividadeView = new AtividadeView();
+            atividadeView.setUsuario(usuario);
+            atividadeView.setVisible(true);
+        }else{
+            Panes.mostraMsg("Você não possui autorização para acessar as atividades");
+        }
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

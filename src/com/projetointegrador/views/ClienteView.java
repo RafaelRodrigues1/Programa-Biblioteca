@@ -1,6 +1,7 @@
 package com.projetointegrador.views;
 
 import com.projetointegrador.controller.ClienteController;
+import com.projetointegrador.model.entities.Usuario;
 import java.text.ParseException;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTable;
@@ -13,10 +14,9 @@ import javax.swing.text.MaskFormatter;
  */
 public final class ClienteView extends javax.swing.JFrame {
 
-    /**
-     * Creates new form CadastroClienteView
-     */
     private final ClienteController clienteController;
+    private Usuario usuario;
+    
     public ClienteView() {
         initComponents();
         setLocationRelativeTo(null);
@@ -432,7 +432,14 @@ public final class ClienteView extends javax.swing.JFrame {
         return jTextPesquisaNome;
     }
     
-    
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+        this.clienteController.setUsuario(usuario);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

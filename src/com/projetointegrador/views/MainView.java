@@ -5,21 +5,31 @@
  */
 package com.projetointegrador.views;
 import com.projetointegrador.controller.MainController;
+import com.projetointegrador.model.entities.Usuario;
 import java.awt.Cursor;
 import javax.swing.JLabel;
 /**
  *
  * @author RafaelRodrigues1
  */
-public class MainView extends javax.swing.JFrame {
+public final class MainView extends javax.swing.JFrame {
 
     /**
      * Creates new form Main
      */
+    
+    private Usuario usuario;
+    
     private MainController mainController;
     public MainView() {        
-        mainController = new MainController(this);
         initComponents();
+        setLocationRelativeTo(null);
+    }
+    
+    public MainView(Usuario usuario) {  
+        initComponents();
+        this.usuario = usuario;
+        mainController = new MainController(this, getUsuario());
         setLocationRelativeTo(null);
     }
 
@@ -39,8 +49,8 @@ public class MainView extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuClientes = new javax.swing.JMenu();
         jMenuLivros = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
+        jMenuEmprestimos = new javax.swing.JMenu();
+        jMenuAtividades = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -99,13 +109,18 @@ public class MainView extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenuLivros);
 
-        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/projetointegrador/Imagens/Empréstimo.png"))); // NOI18N
-        jMenu3.setText("Empréstimos");
-        jMenuBar1.add(jMenu3);
+        jMenuEmprestimos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/projetointegrador/Imagens/Empréstimo.png"))); // NOI18N
+        jMenuEmprestimos.setText("Empréstimos");
+        jMenuBar1.add(jMenuEmprestimos);
 
-        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/projetointegrador/Imagens/Atividades.png"))); // NOI18N
-        jMenu4.setText("Atividades");
-        jMenuBar1.add(jMenu4);
+        jMenuAtividades.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/projetointegrador/Imagens/Atividades.png"))); // NOI18N
+        jMenuAtividades.setText("Atividades");
+        jMenuAtividades.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuAtividadesMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenuAtividades);
 
         jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/projetointegrador/Imagens/DB.png"))); // NOI18N
         jMenu5.setText("Livros DataBase");
@@ -137,6 +152,10 @@ public class MainView extends javax.swing.JFrame {
     private void jMenuClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuClientesMouseClicked
         mainController.abrirClientes();
     }//GEN-LAST:event_jMenuClientesMouseClicked
+
+    private void jMenuAtividadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuAtividadesMouseClicked
+        mainController.abrirAtividades();
+    }//GEN-LAST:event_jMenuAtividadesMouseClicked
 
     /**
      * @param args the command line arguments
@@ -181,6 +200,16 @@ public class MainView extends javax.swing.JFrame {
     public MainController getMainController() {
         return mainController;
     }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+    
+    
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -188,11 +217,11 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelLogOut;
     private javax.swing.JLabel jLabelNomeUsuario;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenuAtividades;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuClientes;
+    private javax.swing.JMenu jMenuEmprestimos;
     private javax.swing.JMenu jMenuLivros;
     // End of variables declaration//GEN-END:variables
 }
