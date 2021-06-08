@@ -1,5 +1,6 @@
 package com.projetointegrador.model.dao;
 
+import com.projetointegrador.model.dao.interfaces.LivroDaoInterface;
 import com.projetointegrador.database.connection.DBConnection;
 import com.projetointegrador.database.connection.DBException;
 import com.projetointegrador.model.entities.Genero;
@@ -15,7 +16,7 @@ import java.util.List;
 /**
  * @author RafaelRodrigues1
  */
-public class LivroDao implements CrudDao<Livro> {
+public class LivroDao implements LivroDaoInterface<Livro> {
 
     private Connection connection = null;
     private Statement statement = null;
@@ -26,7 +27,7 @@ public class LivroDao implements CrudDao<Livro> {
     public List<Livro> listar() {
         try {
             connection = DBConnection.getConnection();
-            prepStatement = connection.prepareStatement("SELECT * FROM livro ORDER BY titulo;"); // ORDER BY nome;");
+            prepStatement = connection.prepareStatement("SELECT * FROM livro ORDER BY titulo;");
             return funcaoLista(prepStatement);
         } catch (SQLException ex) {
             return null;
@@ -168,4 +169,73 @@ public class LivroDao implements CrudDao<Livro> {
             DBConnection.closeConnection(resultSet, prepStatement, connection);
         }
     }
+    
+    @Override
+    public List<Livro> listarEmprestimo(){
+        try {
+            connection = DBConnection.getConnection();
+            prepStatement = connection.prepareStatement("SELECT * FROM livro "
+                    + "WHERE alugavel = true AND disponivel = true "
+                    + "ORDER BY titulo;");
+            return funcaoLista(prepStatement);
+        } catch (SQLException ex) {
+            return null;
+        } finally {
+            DBConnection.closeConnection(resultSet, prepStatement, connection);
+        }
+    }
+    
+    @Override
+    public Boolean emprestaLivro(Livro livro){
+        try{
+            connection = DBConnection.getConnection();
+            prepStatement = connection.prepareStatement("UPDATE livro "
+                    + "SET disponivel = false WHERE codigo = ? and titulo = ? LIMIT 1;");
+            prepStatement.setInt(1, livro.getCodigo());
+            prepStatement.setString(2, livro.getTitulo());
+            int rowsAffected = prepStatement.executeUpdate();
+            return rowsAffected > 0;
+        }catch(SQLException ex){
+            ex.printStackTrace();
+            return false;
+        }finally{
+            DBConnection.closeConnection(prepStatement, connection);
+        }
+    }
+
+    @Override
+    public Boolean devolveLivro(Livro livro) {
+        try{
+            connection = DBConnection.getConnection();
+            prepStatement = connection.prepareStatement("UPDATE livro "
+                    + "SET disponivel = true WHERE codigo = ? and titulo = ? LIMIT 1;");
+            prepStatement.setInt(1, livro.getCodigo());
+            prepStatement.setString(2, livro.getTitulo());
+            int rowsAffected = prepStatement.executeUpdate();
+            return rowsAffected > 0;
+        }catch(SQLException ex){
+            ex.printStackTrace();
+            return false;
+        }finally{
+            DBConnection.closeConnection(prepStatement, connection);
+        }
+    }
+
+    @Override
+    public List<Livro> pesquisarEmprestimo(String pesquisa) {
+        try{
+            connection = DBConnection.getConnection();
+            prepStatement = connection.prepareStatement("SELECT * FROM livro WHERE "
+                    + "titulo LIKE ? AND alugavel = true AND disponivel = true "
+                    + "ORDER BY titulo ;");
+            prepStatement.setString(1, "%"+pesquisa+"%");
+            return funcaoLista(prepStatement);
+        }catch(SQLException ex){
+            return null;
+        }finally{
+            DBConnection.closeConnection(resultSet, prepStatement, connection);
+        }
+    }
+    
+    
 }

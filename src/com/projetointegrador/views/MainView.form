@@ -39,6 +39,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Empr&#xe9;stimos"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenuEmprestimosMouseClicked"/>
+          </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenuAtividades">
           <Properties>

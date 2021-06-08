@@ -1,5 +1,3 @@
-Restrição de idade na classe Livros
-
 Lógica de restrição de empréstimos em caso de atraso(na classe Cliente)
 Caso de roubo de livro
 Sinalizar na tabela os clientes com entregas atrasadas

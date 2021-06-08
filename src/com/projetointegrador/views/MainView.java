@@ -111,6 +111,11 @@ public final class MainView extends javax.swing.JFrame {
 
         jMenuEmprestimos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/projetointegrador/Imagens/Empréstimo.png"))); // NOI18N
         jMenuEmprestimos.setText("Empréstimos");
+        jMenuEmprestimos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuEmprestimosMouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jMenuEmprestimos);
 
         jMenuAtividades.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/projetointegrador/Imagens/Atividades.png"))); // NOI18N
@@ -156,6 +161,10 @@ public final class MainView extends javax.swing.JFrame {
     private void jMenuAtividadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuAtividadesMouseClicked
         mainController.abrirAtividades();
     }//GEN-LAST:event_jMenuAtividadesMouseClicked
+
+    private void jMenuEmprestimosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuEmprestimosMouseClicked
+        mainController.abrirEmprestimos();
+    }//GEN-LAST:event_jMenuEmprestimosMouseClicked
 
     /**
      * @param args the command line arguments

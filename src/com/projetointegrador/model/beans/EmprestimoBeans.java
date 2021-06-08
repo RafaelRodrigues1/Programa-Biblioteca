@@ -1,10 +1,20 @@
 package com.projetointegrador.model.beans;
 
 import com.projetointegrador.controller.EmprestimoController;
+import com.projetointegrador.model.dao.ClienteDao;
+import com.projetointegrador.model.dao.interfaces.ClienteDaoInterface;
 import com.projetointegrador.model.dao.EmprestimoDao;
+import com.projetointegrador.model.dao.LivroDao;
+import com.projetointegrador.model.dao.interfaces.LivroDaoInterface;
+import com.projetointegrador.model.dao.RegistroDao;
+import com.projetointegrador.model.entities.Cliente;
 import com.projetointegrador.model.entities.Emprestimo;
+import com.projetointegrador.model.entities.Livro;
+import com.projetointegrador.model.entities.Registro;
+import com.projetointegrador.views.Panes;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 /**
  * @author RafaelRodrigues1
@@ -14,27 +24,87 @@ public class EmprestimoBeans {
     private final Double MULTA_DIA = 5d;
     private EmprestimoController emprestimoController;
     private EmprestimoDao emprestimoDao;
+    private ClienteDaoInterface clienteDao;
+    private LivroDaoInterface livroDao;
+    private RegistroDao registroDao;
+    
 
     public EmprestimoBeans(EmprestimoController emprestimoController) {
         this.emprestimoController = emprestimoController;
-        emprestimoDao = new EmprestimoDao(this);
+        emprestimoDao = new EmprestimoDao();
+        clienteDao = new ClienteDao();
+        livroDao = new LivroDao();
+        registroDao = new RegistroDao();
     }
     
+    public Boolean efetuaEmprestimo(Integer idCliente, String nomeCliente, Integer quantidadeEmprestimos,
+            Integer codigoLivro, String Titulo){
+        Emprestimo emprestimo = new Emprestimo(new Cliente(idCliente, nomeCliente, quantidadeEmprestimos), 
+                new Livro(Titulo, codigoLivro), LocalDate.now());
+        if(emprestimoDao.efetuaEmprestimo(emprestimo)){
+            if(livroDao.emprestaLivro(emprestimo.getLivro()) && 
+                    clienteDao.tomaLivroEmprestado(emprestimo.getCliente())){
+                Registro registro = new Registro(emprestimoController.getUsuario(), 
+                    "Empréstimo do livro: " + emprestimo.getLivro().getTitulo()
+                            + " para o Cliente: " + emprestimo.getCliente().getNome());
+                    registroDao.cadastroRegistro(registro);
+                if(clienteDao.numeroLivros(emprestimo.getCliente()) >= 3){
+                    return clienteDao.desautorizaCliente(emprestimo.getCliente());
+                }
+                return true;
+            }
+        }
+        return false;
+    }
     
+    public Boolean devolveLivro(Integer id){
+        Emprestimo emprestimo = emprestimoDao.buscarPorId(id);
+        
+        if(calculaMulta(emprestimo)){
+            if(emprestimoDao.fechaEmprestimo(id)){
+                if(livroDao.devolveLivro(emprestimo.getLivro()) &&
+                        clienteDao.devolveLivro(emprestimo.getCliente())){
+                    Registro registro = new Registro(emprestimoController.getUsuario(), 
+                    "Devolução do livro: " + emprestimo.getLivro().getTitulo()
+                            + " do Cliente: " + emprestimo.getCliente().getNome());
+                    registroDao.cadastroRegistro(registro);
+                    if(clienteDao.numeroLivros(emprestimo.getCliente()) < 3){
+                        return clienteDao.autorizaCliente(emprestimo.getCliente());
+                    }
+                }
+                return true;
+            }
+        }
+        return false;
+    }
     
+    public List<Livro> pesquisaLivro(String pesquisa){
+        return livroDao.pesquisarEmprestimo(pesquisa);
+    }
     
-    public Double calculaMulta(Emprestimo emprestimo){   //Deve estar no EmprestimoBeans????
-//        Date dataAtual = new Date();
-//        Long diferenca = dataAtual.getTime() - getDataEntrega().getTime();
-//        Long dias = TimeUnit.DAYS.convert(diferenca, TimeUnit.MILLISECONDS);
+    public List<Cliente> pesquisaCliente(String nome){
+        return clienteDao.pesquisarEmprestimo(nome);
+    }
+    
+    public List<Emprestimo> listar(){
+        return emprestimoDao.listar();
+    }
+    
+    public List<Livro> listarLivro(){
+        return livroDao.listarEmprestimo();
+    }
+    
+    public List<Cliente> listarCliente(){
+        return clienteDao.listarEmprestimo();
+    }
+    
+    private Boolean calculaMulta(Emprestimo emprestimo){
         LocalDate dataEntrega = LocalDate.now();
-        System.out.println(dataEntrega);
-        //Period periodo = Period.between(getDataEntrega(), dataAtual);
-        //int dias = periodo.getDays();
         long dias = ChronoUnit.DAYS.between(emprestimo.getDataPrazoEntrega(), dataEntrega);
         if(dias>0){
-            return MULTA_DIA*dias*emprestimo.getListaLivro().size();
+            return Panes.confirma("Multa de R$" + String.format("%.2f", MULTA_DIA*dias) + "\n"
+                    + "Por " + dias + " dias de atraso") != 1 ;
         }
-        return 0d;
+        return true;
     }
 }

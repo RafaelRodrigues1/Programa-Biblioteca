@@ -5,7 +5,6 @@ import com.projetointegrador.model.entities.Registro;
 import com.projetointegrador.model.entities.Usuario;
 import com.projetointegrador.printservices.AtividadePrint;
 import com.projetointegrador.views.AtividadeView;
-import com.projetointegrador.views.MainView;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import java.time.format.DateTimeFormatter;

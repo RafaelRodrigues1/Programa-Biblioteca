@@ -1,6 +1,9 @@
 package com.projetointegrador.views;
 
 import com.projetointegrador.controller.EmprestimoController;
+import com.projetointegrador.model.entities.Usuario;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 
 /**
  * @author RafaelRodrigues1
@@ -8,11 +11,12 @@ import com.projetointegrador.controller.EmprestimoController;
 public class EmprestimoView extends javax.swing.JFrame {
 
     private final EmprestimoController emprestimoController;
-    
+    private Usuario usuario;
     public EmprestimoView() {
         initComponents();
         setLocationRelativeTo(null); 
         emprestimoController = new EmprestimoController(this);
+        emprestimoController.telaDefault();
     }
 
     /**
@@ -24,21 +28,260 @@ public class EmprestimoView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
+        jCheckBoxMenuItem2 = new javax.swing.JCheckBoxMenuItem();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableLivros = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableClientes = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTableEmprestimos = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jButtonVoltar = new javax.swing.JButton();
+        jButtonEfetuarEmprestimo = new javax.swing.JButton();
+        jButtonDevolveLivro = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jTextPesquisaCliente = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jTextPesquisaLivro = new javax.swing.JTextField();
+
+        jCheckBoxMenuItem1.setSelected(true);
+        jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
+
+        jCheckBoxMenuItem2.setSelected(true);
+        jCheckBoxMenuItem2.setText("jCheckBoxMenuItem2");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+
+        jTableLivros.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Código", "Título", "Restrição etária"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTableLivros);
+        if (jTableLivros.getColumnModel().getColumnCount() > 0) {
+            jTableLivros.getColumnModel().getColumn(0).setResizable(false);
+            jTableLivros.getColumnModel().getColumn(0).setPreferredWidth(15);
+            jTableLivros.getColumnModel().getColumn(1).setResizable(false);
+            jTableLivros.getColumnModel().getColumn(1).setPreferredWidth(150);
+            jTableLivros.getColumnModel().getColumn(2).setResizable(false);
+            jTableLivros.getColumnModel().getColumn(2).setPreferredWidth(60);
+        }
+
+        jTableClientes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Nome", "Maior de idade", "Empréstimos"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTableClientes);
+        if (jTableClientes.getColumnModel().getColumnCount() > 0) {
+            jTableClientes.getColumnModel().getColumn(0).setResizable(false);
+            jTableClientes.getColumnModel().getColumn(0).setPreferredWidth(5);
+            jTableClientes.getColumnModel().getColumn(1).setResizable(false);
+            jTableClientes.getColumnModel().getColumn(1).setPreferredWidth(150);
+            jTableClientes.getColumnModel().getColumn(2).setResizable(false);
+            jTableClientes.getColumnModel().getColumn(2).setPreferredWidth(60);
+            jTableClientes.getColumnModel().getColumn(3).setResizable(false);
+            jTableClientes.getColumnModel().getColumn(3).setPreferredWidth(60);
+        }
+
+        jTableEmprestimos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Cliente", "ID cliente", "Livro", "ID livro", "Data do empréstimo", "Prazo para entrega"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(jTableEmprestimos);
+        if (jTableEmprestimos.getColumnModel().getColumnCount() > 0) {
+            jTableEmprestimos.getColumnModel().getColumn(0).setPreferredWidth(10);
+            jTableEmprestimos.getColumnModel().getColumn(1).setPreferredWidth(150);
+            jTableEmprestimos.getColumnModel().getColumn(2).setPreferredWidth(10);
+            jTableEmprestimos.getColumnModel().getColumn(3).setPreferredWidth(150);
+            jTableEmprestimos.getColumnModel().getColumn(4).setPreferredWidth(25);
+            jTableEmprestimos.getColumnModel().getColumn(5).setPreferredWidth(65);
+            jTableEmprestimos.getColumnModel().getColumn(6).setPreferredWidth(55);
+        }
+
+        jLabel1.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
+        jLabel1.setText("Empréstimo");
+
+        jButtonVoltar.setFont(new java.awt.Font("SansSerif", 0, 20)); // NOI18N
+        jButtonVoltar.setText("Voltar");
+        jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVoltarActionPerformed(evt);
+            }
+        });
+
+        jButtonEfetuarEmprestimo.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jButtonEfetuarEmprestimo.setText("Efetuar Empréstimo");
+        jButtonEfetuarEmprestimo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEfetuarEmprestimoActionPerformed(evt);
+            }
+        });
+
+        jButtonDevolveLivro.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jButtonDevolveLivro.setText("Devolver Livro");
+        jButtonDevolveLivro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDevolveLivroActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        jLabel2.setText("Pesquisa: ");
+
+        jTextPesquisaCliente.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jTextPesquisaCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextPesquisaClienteKeyReleased(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        jLabel3.setText("Pesquisa:");
+
+        jTextPesquisaLivro.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jTextPesquisaLivro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextPesquisaLivroKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(73, 73, 73)
+                .addComponent(jButtonVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 283, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(472, 472, 472))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane3)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextPesquisaCliente))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButtonEfetuarEmprestimo, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                            .addComponent(jButtonDevolveLivro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextPesquisaLivro)))))
+                .addGap(18, 18, 18))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jButtonVoltar))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jTextPesquisaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(jTextPesquisaLivro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonEfetuarEmprestimo)
+                        .addGap(39, 39, 39)
+                        .addComponent(jButtonDevolveLivro)
+                        .addGap(51, 51, 51)))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
+        emprestimoController.voltar();
+    }//GEN-LAST:event_jButtonVoltarActionPerformed
+
+    private void jButtonEfetuarEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEfetuarEmprestimoActionPerformed
+        emprestimoController.efetuaEmprestimo();
+    }//GEN-LAST:event_jButtonEfetuarEmprestimoActionPerformed
+
+    private void jButtonDevolveLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDevolveLivroActionPerformed
+        emprestimoController.devolveLivro();
+    }//GEN-LAST:event_jButtonDevolveLivroActionPerformed
+
+    private void jTextPesquisaClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextPesquisaClienteKeyReleased
+        emprestimoController.pesquisaCliente();
+    }//GEN-LAST:event_jTextPesquisaClienteKeyReleased
+
+    private void jTextPesquisaLivroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextPesquisaLivroKeyReleased
+        emprestimoController.pesquisaLivro();
+    }//GEN-LAST:event_jTextPesquisaLivroKeyReleased
 
     /**
      * @param args the command line arguments
@@ -75,6 +318,51 @@ public class EmprestimoView extends javax.swing.JFrame {
         });
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+        emprestimoController.setUsuario(usuario);
+    }
+
+    public JTable getjTableClientes() {
+        return jTableClientes;
+    }
+
+    public JTable getjTableEmprestimos() {
+        return jTableEmprestimos;
+    }
+
+    public JTable getjTableLivros() {
+        return jTableLivros;
+    }
+
+    public JTextField getjTextPesquisaCliente() {
+        return jTextPesquisaCliente;
+    }
+
+    public JTextField getjTextPesquisaLivro() {
+        return jTextPesquisaLivro;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonDevolveLivro;
+    private javax.swing.JButton jButtonEfetuarEmprestimo;
+    private javax.swing.JButton jButtonVoltar;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTableClientes;
+    private javax.swing.JTable jTableEmprestimos;
+    private javax.swing.JTable jTableLivros;
+    private javax.swing.JTextField jTextPesquisaCliente;
+    private javax.swing.JTextField jTextPesquisaLivro;
     // End of variables declaration//GEN-END:variables
 }

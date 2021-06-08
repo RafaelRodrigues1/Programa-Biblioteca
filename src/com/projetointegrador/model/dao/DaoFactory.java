@@ -1,5 +1,7 @@
 package com.projetointegrador.model.dao;
 
+import com.projetointegrador.model.dao.interfaces.CrudDao;
+
 /**
  * @author RafaelRodrigues1
  */

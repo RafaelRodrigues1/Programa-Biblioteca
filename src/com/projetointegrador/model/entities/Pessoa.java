@@ -15,6 +15,10 @@ public abstract class Pessoa implements Comparable<Pessoa> {
         this.nome = nome;
         this.dataNascimento = dataNascimento;
     }
+
+    public Pessoa(String nome) {
+        this.nome = nome;
+    }
     
     public Pessoa(){
         

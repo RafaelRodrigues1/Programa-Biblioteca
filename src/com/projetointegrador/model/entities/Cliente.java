@@ -44,6 +44,18 @@ public class Cliente extends Pessoa  {
         this.email = email;
         this.cpf = cpf;
     }
+        //Construtor para tela de Empréstimo
+    public Cliente(Integer id, String nome, Integer numeroLivros) {
+        super(nome);
+        this.id = id;
+        this.numeroLivros = numeroLivros;
+    }
+
+        //Construtor para Empréstimo
+    public Cliente(Integer id, String nome) {
+        super(nome);
+        this.id = id;
+    }
 
     public Integer getId() {
         return id;

@@ -4,6 +4,7 @@ import com.projetointegrador.views.MainView;
 import com.projetointegrador.model.entities.Usuario;
 import com.projetointegrador.views.AtividadeView;
 import com.projetointegrador.views.ClienteView;
+import com.projetointegrador.views.EmprestimoView;
 import com.projetointegrador.views.LivroView;
 import com.projetointegrador.views.LoginView;
 import com.projetointegrador.views.Panes;
@@ -19,6 +20,7 @@ public class MainController {
     private LivroView livroView;
     private ClienteView clienteView;
     private AtividadeView atividadeView;
+    private EmprestimoView emprestimoView;
 
     public MainController(MainView mainView, Usuario usuario) {
         this.mainView = mainView;
@@ -47,6 +49,13 @@ public class MainController {
         clienteView = new ClienteView();
         clienteView.setUsuario(usuario);
         clienteView.setVisible(true);
+        mainView.setVisible(false);
+    }
+    
+    public void abrirEmprestimos(){
+        emprestimoView = new EmprestimoView();
+        emprestimoView.setUsuario(usuario);
+        emprestimoView.setVisible(true);
         mainView.setVisible(false);
     }
     

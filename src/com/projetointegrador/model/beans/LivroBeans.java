@@ -1,7 +1,7 @@
 package com.projetointegrador.model.beans;
 
 import com.projetointegrador.controller.LivroController;
-import com.projetointegrador.model.dao.CrudDao;
+import com.projetointegrador.model.dao.interfaces.CrudDao;
 import com.projetointegrador.model.dao.DaoFactory;
 import com.projetointegrador.model.dao.RegistroDao;
 import com.projetointegrador.model.entities.Genero;

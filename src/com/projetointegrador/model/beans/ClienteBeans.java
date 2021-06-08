@@ -6,7 +6,7 @@ import com.projetointegrador.printservices.ClientePrint;
 import java.time.LocalDate;
 import java.util.List;
 import java.time.format.DateTimeFormatter;
-import com.projetointegrador.model.dao.CrudDao;
+import com.projetointegrador.model.dao.interfaces.CrudDao;
 import com.projetointegrador.model.dao.DaoFactory;
 import com.projetointegrador.model.dao.RegistroDao;
 import com.projetointegrador.model.entities.Registro;

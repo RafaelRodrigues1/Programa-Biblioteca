@@ -1,8 +1,6 @@
 package com.projetointegrador.model.entities;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -12,26 +10,25 @@ public class Emprestimo {
     
     private Integer codigo;
     private Cliente cliente;
-    private List<Livro> listaLivro;
+    private Livro livro;
     private LocalDate dataEmprestimo;
     private LocalDate dataPrazoEntrega;
     private final Long PRAZO = 5l; //Prazo de 5 dias para devolução do livro
-//    private final Double MULTA_DIA =5d;
     
     //Momento do empréstimo                                
-    public Emprestimo(Cliente cliente, List<Livro> listaLivro, LocalDate dataEmprestimo) {
+    public Emprestimo(Cliente cliente, Livro livro, LocalDate dataEmprestimo) {
         this.cliente = cliente;
-        this.listaLivro = listaLivro;
+        this.livro = livro;
         this.dataEmprestimo = dataEmprestimo;
         this.dataPrazoEntrega = calculaPrazo(dataEmprestimo);
     }
     
     //Dados vindos da DB
-    public Emprestimo(Integer codigo, Cliente cliente, List<Livro> listaLivro, 
+    public Emprestimo(Integer codigo, Cliente cliente, Livro livro, 
             LocalDate dataEmprestimo, LocalDate dataPrazoEntrega){
         this.codigo = codigo;
         this.cliente = cliente;
-        this.listaLivro = listaLivro;
+        this.livro = livro;
         this.dataEmprestimo = dataEmprestimo;
         this.dataPrazoEntrega = dataPrazoEntrega; //será a data atual no Beans
     }
@@ -49,21 +46,6 @@ public class Emprestimo {
         System.out.println(dataPrazoEntrega);
         return dataPrazoEntrega;
     }
-        
-//    public Double calculaMulta(){   //Deve estar no EmprestimoBeans????
-////        Date dataAtual = new Date();
-////        Long diferenca = dataAtual.getTime() - getDataEntrega().getTime();
-////        Long dias = TimeUnit.DAYS.convert(diferenca, TimeUnit.MILLISECONDS);
-//        LocalDate dataEntrega = LocalDate.now();
-//        System.out.println(dataEntrega);
-//        //Period periodo = Period.between(getDataEntrega(), dataAtual);
-//        //int dias = periodo.getDays();
-//        long dias = ChronoUnit.DAYS.between(getDataPrazoEntrega(), dataEntrega);
-//        if(dias>0){
-//            return MULTA_DIA*dias*getListaLivro().size();
-//        }
-//        return 0d;
-//    }
 
     public Integer getCodigo() {
         return codigo;
@@ -81,12 +63,8 @@ public class Emprestimo {
         this.cliente = cliente;
     }
 
-    public List<Livro> getListaLivro() {
-        return listaLivro;
-    }
-
-    public void setListaLivro(List<Livro> listaLivro) {
-        this.listaLivro = listaLivro;
+    public Livro getLivro() {
+        return livro;
     }
 
     public LocalDate getDataEmprestimo() {

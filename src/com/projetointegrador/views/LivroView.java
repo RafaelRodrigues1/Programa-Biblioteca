@@ -72,7 +72,7 @@ public class LivroView extends javax.swing.JFrame {
         jTextPesquisa = new javax.swing.JTextField();
         jCheckRestricaoEtaria = new javax.swing.JCheckBox();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N

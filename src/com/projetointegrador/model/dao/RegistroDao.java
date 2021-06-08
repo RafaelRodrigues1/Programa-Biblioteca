@@ -1,7 +1,6 @@
 package com.projetointegrador.model.dao;
 
 import com.projetointegrador.database.connection.DBConnection;
-import com.projetointegrador.database.connection.DBException;
 import com.projetointegrador.model.entities.Registro;
 import com.projetointegrador.model.entities.Usuario;
 import java.sql.Connection;

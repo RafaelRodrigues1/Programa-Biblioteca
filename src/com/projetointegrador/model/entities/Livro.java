@@ -33,7 +33,6 @@ public class Livro implements Comparable<Livro> {
         this.codigo = codigo;
     }
     
-    
         //Construtor para cadastro
     public Livro(String titulo, String autor, Genero genero, String editora, String edicao, String anotacoes,
             Boolean alugavel, Boolean restricaoEtaria) {
@@ -47,6 +46,11 @@ public class Livro implements Comparable<Livro> {
         this.disponivel = alugavel;
         this.restricaoEtaria = restricaoEtaria;
     } 
+
+    public Livro(String titulo, Integer codigo) {
+        this.titulo = titulo;
+        this.codigo = codigo;
+    }
     
     @Override
     public int compareTo(Livro o) {

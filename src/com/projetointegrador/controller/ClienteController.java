@@ -33,7 +33,7 @@ public class ClienteController {
             if(!clienteView.getjTextNome().getText().isBlank() && !clienteView.getjFormattedTextData().getText().isBlank()
                 && !clienteView.getjTextEmail().getText().isBlank() && !clienteView.getjTextEndereco().getText().isBlank() 
                     && !clienteView.getjFormattedTextTelefone().getText().isBlank()){
-                if(verificaPadrao()){
+                if(verificaPadrao("\\d{3}.\\d{3}.\\d{3}.\\d{2}")){
                     if(clienteBeans.cadastrar(clienteView.getjTextNome().getText(), clienteView.getjFormattedTextData().getText(), 
                             clienteView.getjTextEmail().getText(), clienteView.getjFormattedTextCPF().getText(), 
                             clienteView.getjTextEndereco().getText(), clienteView.getjFormattedTextTelefone().getText())){
@@ -73,7 +73,6 @@ public class ClienteController {
             }else{
                 throw new Exception("Selecione um cliente para apagar");
             }
-            
         }catch(Exception ex){
             Panes.mostraMsg(ex.getMessage());
         }
@@ -86,7 +85,7 @@ public class ClienteController {
                 Integer id = (int) clienteView.getjTableClientes().getValueAt(row, 0);
                 String nome = clienteView.getjTableClientes().getValueAt(row, 1).toString();
                 if(Panes.confirma("Deseja alterar os dados do cliente: " + nome + "?")!=1){
-                    if(verificaPadrao("Cpf não altera")){  
+                    if(verificaPadrao("\\S*")){  
                         if(clienteBeans.alteraCliente(nome, id, clienteView.getjTextEmail().getText(), 
                                 clienteView.getjTextNome().getText(), 
                                 clienteView.getjFormattedTextData().getText(),
@@ -110,10 +109,10 @@ public class ClienteController {
         }
     }
     
-    public Boolean verificaPadrao(){
+    public Boolean verificaPadrao(String cpfPattern){
         Pattern email = Pattern.compile("\\S+@{1}[a-z A-Z]+(.com|.com.br)");
         Matcher matchEmail = email.matcher(clienteView.getjTextEmail().getText());
-        Pattern cpf = Pattern.compile("\\d{3}.\\d{3}.\\d{3}.\\d{2}");
+        Pattern cpf = Pattern.compile(cpfPattern);
         Matcher matchCpf = cpf.matcher(clienteView.getjFormattedTextCPF().getText());
         Pattern data = Pattern.compile("\\d{2}/\\d{2}/\\d{4}");
         Matcher matchData = data.matcher(clienteView.getjFormattedTextData().getText());
@@ -122,15 +121,15 @@ public class ClienteController {
         return matchEmail.find() && matchCpf.find() && matchData.find() && matchTelefone.find();
     }
     
-    public Boolean verificaPadrao(String cpf){
-        Pattern email = Pattern.compile("\\S+@{1}[a-z A-Z]+(.com|.com.br)");
-        Matcher matchEmail = email.matcher(clienteView.getjTextEmail().getText());
-        Pattern data = Pattern.compile("\\d{2}/\\d{2}/\\d{4}");
-        Matcher matchData = data.matcher(clienteView.getjFormattedTextData().getText());
-        Pattern telefone = Pattern.compile("\\(\\d{2}\\)\\d{1} \\d{4}-\\d{4}");
-        Matcher matchTelefone = telefone.matcher(clienteView.getjFormattedTextTelefone().getText());
-        return matchEmail.find() && matchData.find() && matchTelefone.find();
-    }
+//    public Boolean verificaPadrao(String cpf){
+//        Pattern email = Pattern.compile("\\S+@{1}[a-z A-Z]+(.com|.com.br)");
+//        Matcher matchEmail = email.matcher(clienteView.getjTextEmail().getText());
+//        Pattern data = Pattern.compile("\\d{2}/\\d{2}/\\d{4}");
+//        Matcher matchData = data.matcher(clienteView.getjFormattedTextData().getText());
+//        Pattern telefone = Pattern.compile("\\(\\d{2}\\)\\d{1} \\d{4}-\\d{4}");
+//        Matcher matchTelefone = telefone.matcher(clienteView.getjFormattedTextTelefone().getText());
+//        return matchEmail.find() && matchData.find() && matchTelefone.find();
+//    }
     
     public void voltar(){
         clienteView.setVisible(false);
