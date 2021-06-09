@@ -20,12 +20,10 @@ public class ClienteBeans {
     private final ClienteController clienteController;
     private final CrudDao clienteDao;
     private final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    private RegistroDao registroDao;
     
     public ClienteBeans(ClienteController clienteController) {
         this.clienteController = clienteController;
         clienteDao = DaoFactory.getClienteDao();
-        registroDao = new RegistroDao();
     }
     
     public Boolean cadastrar(String nome, String dataNascimento, String email, String cpf, 
@@ -33,9 +31,8 @@ public class ClienteBeans {
         LocalDate data = LocalDate.parse(dataNascimento, dtf);
         Cliente cliente = new Cliente(nome, data, email, cpf, endereco, telefone);
         if(clienteDao.cadastrar(cliente)){
-            Registro registro = new Registro(clienteController.getUsuario(), 
-                    "Cadastro do cliente " + nome + " no sistema");
-            registroDao.cadastroRegistro(registro);
+            RegistroDao.cadastroRegistro(new Registro(clienteController.getUsuario(), 
+                    "Cadastro do cliente " + nome + " no sistema"));
             return true;
         }
         return false;
@@ -46,9 +43,8 @@ public class ClienteBeans {
         LocalDate dataNasc = LocalDate.parse(dataNascimentoAtt, dtf);
         Cliente cliente = new Cliente(id, nomeAtt, dataNasc, email, "", enderecoAtt, telefoneAtt);
         if(clienteDao.alterar(cliente)){
-            Registro registro = new Registro(clienteController.getUsuario(), 
-                    "Alteração dos dados do cliente " + nome + " ID: " + id);
-            registroDao.cadastroRegistro(registro);
+            RegistroDao.cadastroRegistro(new Registro(clienteController.getUsuario(), 
+                    "Alteração dos dados do cliente " + nome + " ID: " + id));
             return true;
         }
         return false;
@@ -56,9 +52,8 @@ public class ClienteBeans {
     
     public Boolean apagaCliente(Integer id, String nome){
         if(clienteDao.apagar(id)){
-            Registro registro = new Registro(clienteController.getUsuario(), 
-                    "Apagamento dos dados do cliente " + nome + " ID: " + id);
-            registroDao.cadastroRegistro(registro);
+            RegistroDao.cadastroRegistro(new Registro(clienteController.getUsuario(), 
+                    "Apagamento dos dados do cliente " + nome + " ID: " + id));
             return true;
         }
         return false;
@@ -84,8 +79,7 @@ public class ClienteBeans {
     public void imprimeRelatorioCliente(){
         ClientePrint print = new ClientePrint(listarCliente());
         print.run();
-        Registro registro = new Registro(clienteController.getUsuario(), 
-                    "Impressão de relatório de clientes");
-            registroDao.cadastroRegistro(registro);
+            RegistroDao.cadastroRegistro(new Registro(clienteController.getUsuario(), 
+                    "Impressão de relatório de clientes"));
     }
 }

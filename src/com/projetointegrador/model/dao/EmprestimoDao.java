@@ -25,13 +25,68 @@ public class EmprestimoDao {
     private PreparedStatement prepStatement = null;
     private ResultSet resultSet = null;
 
-    public List<Emprestimo> listar() {
+    public List<Emprestimo> listarGeral() {
         try {
             connection = DBConnection.getConnection();
             prepStatement = connection.prepareCall("SELECT e.*, c.nome nome_cliente, c.quantidade_livros,"
                     + " l.titulo titulo_livro "
                     + "FROM emprestimo e JOIN (cliente c, livro l) "
-                    + "ON c.id=e.id_cliente and l.codigo=e.codigo_livro WHERE aberto = true;");
+                    + "ON c.id=e.id_cliente and l.codigo=e.codigo_livro;");
+            return funcaoLista(prepStatement);
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        } finally {
+            DBConnection.closeConnection(resultSet, statement, connection);
+        }
+    }
+    
+    public List<Emprestimo> listarAbertos() {
+        try {
+            connection = DBConnection.getConnection();
+            prepStatement = connection.prepareCall("SELECT e.*, c.nome nome_cliente, c.quantidade_livros,"
+                    + " l.titulo titulo_livro "
+                    + "FROM emprestimo e JOIN (cliente c, livro l) "
+                    + "ON c.id=e.id_cliente and l.codigo=e.codigo_livro WHERE e.aberto = true;");
+            return funcaoLista(prepStatement);
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        } finally {
+            DBConnection.closeConnection(resultSet, statement, connection);
+        }
+    }
+    
+    public List<Emprestimo> pesquisaGeral(String pesquisa) {
+        try {
+            connection = DBConnection.getConnection();
+            prepStatement = connection.prepareCall("SELECT e.*, c.nome nome_cliente, c.quantidade_livros,"
+                    + " l.titulo titulo_livro "
+                    + "FROM emprestimo e JOIN (cliente c, livro l) "
+                    + "ON c.id=e.id_cliente and l.codigo=e.codigo_livro "
+                    + "WHERE c.nome LIKE ? or l.titulo LIKE ? ;");
+            prepStatement.setString(1, "%"+pesquisa+"%");
+            prepStatement.setString(2, "%"+pesquisa+"%");
+            return funcaoLista(prepStatement);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.out.println(ex.getMessage());
+            return null;
+        } finally {
+            DBConnection.closeConnection(resultSet, statement, connection);
+        }
+    }
+    
+    public List<Emprestimo> pesquisaAbertos(String pesquisa) {
+        try {
+            connection = DBConnection.getConnection();
+            prepStatement = connection.prepareCall("SELECT e.*, c.nome nome_cliente, c.quantidade_livros,"
+                    + " l.titulo titulo_livro "
+                    + "FROM emprestimo e JOIN (cliente c, livro l) "
+                    + "ON c.id=e.id_cliente and l.codigo=e.codigo_livro "
+                    + "WHERE (c.nome LIKE ? or l.titulo LIKE ?) AND e.aberto = true ;");
+            prepStatement.setString(1, "%"+pesquisa+"%");
+            prepStatement.setString(2, "%"+pesquisa+"%");
             return funcaoLista(prepStatement);
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

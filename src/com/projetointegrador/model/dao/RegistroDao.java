@@ -1,6 +1,7 @@
 package com.projetointegrador.model.dao;
 
 import com.projetointegrador.database.connection.DBConnection;
+import com.projetointegrador.model.beans.LongDate;
 import com.projetointegrador.model.entities.Registro;
 import com.projetointegrador.model.entities.Usuario;
 import java.sql.Connection;
@@ -9,23 +10,22 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author RafaelRodrigues1
  */
-public class RegistroDao {
+public abstract class RegistroDao {
 
-    private Connection connection = null;
-    private Statement statement = null;
-    private PreparedStatement prepStatement = null;
-    private ResultSet resultSet = null;
+    private static Connection connection = null;
+    private static Statement statement = null;
+    private static PreparedStatement prepStatement = null;
+    private static ResultSet resultSet = null;
 
-    public Boolean cadastroRegistro(Registro registro) {
+    public static Boolean cadastroRegistro(Registro registro) {
         try {
-            long dataHora = registro.getDataHora().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+            long dataHora = LongDate.getLongDate(registro.getDataHora());
             connection = DBConnection.getConnection();
             prepStatement = connection.prepareStatement("INSERT INTO registro VALUES (? , ? , ?)");
             prepStatement.setString(1, registro.getUsuario().getLogin());
@@ -39,11 +39,8 @@ public class RegistroDao {
             DBConnection.closeConnection(prepStatement, connection);
         }
     }
-    public static void main(String[] args) {
-        
-    }
 
-    public List<Registro> listar() {
+    public static List<Registro> listar() {
         try {
             List<Registro> listaRegistro = new ArrayList<>();
             connection = DBConnection.getConnection();

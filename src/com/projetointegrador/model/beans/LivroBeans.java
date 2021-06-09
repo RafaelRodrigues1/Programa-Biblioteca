@@ -17,13 +17,11 @@ public class LivroBeans {
     
     private final CrudDao livroDao;
     private final LivroController livroController;
-    private final RegistroDao registroDao;
 
 
     public LivroBeans(LivroController livroController) {
         this.livroController = livroController;
         livroDao = DaoFactory.getLivroDao();
-        registroDao = new RegistroDao();
     }
     
     public Boolean cadastrar(String titulo, String autor, String genero, String editora, 
@@ -31,9 +29,8 @@ public class LivroBeans {
         Genero gender = Genero.valueOf(genero.toUpperCase().replace(" ", "_"));
         Livro livro = new Livro(titulo, autor, gender, editora, edicao, anotacoes, alugavel, restricao);
         if(livroDao.cadastrar(livro)){
-            Registro registro = new Registro(livroController.getUsuario(), 
-                    "Cadastro do livro " + titulo + " no sistema");
-            registroDao.cadastroRegistro(registro);
+            RegistroDao.cadastroRegistro(new Registro(livroController.getUsuario(), 
+                    "Cadastro do livro " + titulo + " no sistema"));
             return true;
         }
         return false;
@@ -46,9 +43,8 @@ public class LivroBeans {
                 anotacoesAtt, alugavelAtt, restricao);
         livro.setCodigo(cod);
         if(livroDao.alterar(livro)){
-            Registro registro = new Registro(livroController.getUsuario(), 
-                    "Alteração dos dados do livro " + titulo + " Código: " + cod);
-            registroDao.cadastroRegistro(registro);
+            RegistroDao.cadastroRegistro(new Registro(livroController.getUsuario(), 
+                    "Alteração dos dados do livro " + titulo + " Código: " + cod));
             return true;
         }
         return false;
@@ -56,9 +52,8 @@ public class LivroBeans {
     
     public Boolean apagaLivro(Integer cod, String titulo){
         if(livroDao.apagar(cod)){
-            Registro registro = new Registro(livroController.getUsuario(), 
-                    "Apagamento dos dados do livro " + titulo + " Código: " + cod);
-            registroDao.cadastroRegistro(registro);
+            RegistroDao.cadastroRegistro(new Registro(livroController.getUsuario(), 
+                    "Apagamento dos dados do livro " + titulo + " Código: " + cod));
             return true;
         }
         return false;
@@ -80,5 +75,5 @@ public class LivroBeans {
             }
         }
         return null;
-    }    
+    }
 }

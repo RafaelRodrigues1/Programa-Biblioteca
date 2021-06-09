@@ -67,17 +67,21 @@ public class EmprestimoController {
     
     public void devolveLivro(){
         try{
-            if(emprestimoView.getjTableEmprestimos().getSelectedRow()>=0){
+            if(!emprestimoView.getjCheckBoxMostrarTodos().isSelected()){
+                if(emprestimoView.getjTableEmprestimos().getSelectedRow()>=0){
                 Integer row = emprestimoView.getjTableEmprestimos().getSelectedRow();
                 Integer codigo = (int) emprestimoView.getjTableEmprestimos().getValueAt(row, 0);
-                if(emprestimoBeans.devolveLivro(codigo)){
-                    Panes.mostraMsg("Livro devolvido com sucesso!");
-                    telaDefault();
+                    if(emprestimoBeans.devolveLivro(codigo)){
+                        Panes.mostraMsg("Livro devolvido com sucesso!");
+                        telaDefault();
+                    }else{
+                        throw new DBException("Devolução cancelada");
+                    }
                 }else{
-                    throw new DBException("Devolução cancelada");
+                    throw new DBException("Selecione um registro na tabela de empréstimos");
                 }
             }else{
-                throw new DBException("Selecione um registro na tabela de empréstimos");
+                throw new DBException("Desmarque a opção \"mostrar todos\"");
             }
         }catch(DBException ex){
             Panes.mostraMsg(ex.getMessage());
@@ -91,8 +95,21 @@ public class EmprestimoController {
     }
     
     private void tabelaEmprestimoDefault(){
-        List<Emprestimo> listaEmprestimo = emprestimoBeans.listar();
+        List<Emprestimo> listaEmprestimo = emprestimoBeans.listarAbertos();
         preencheTabelaEmprestimo(listaEmprestimo);
+    }
+    
+    public void tabelaEmprestimo(){
+        if(emprestimoView.getjTextPesquisaEmprestimo().getText().isBlank()){
+            if(emprestimoView.getjCheckBoxMostrarTodos().isSelected()){
+                List<Emprestimo> listaEmprestimo = emprestimoBeans.listarTodos();
+                preencheTabelaEmprestimo(listaEmprestimo);
+            }else{
+                tabelaEmprestimoDefault();
+            }
+        }else{
+            pesquisaEmprestimo();
+        }
     }
     
     private void tabelaLivroDefault(){
@@ -105,11 +122,29 @@ public class EmprestimoController {
         preencheTabelaCliente(listaCliente);
     }
     
+    public void pesquisaEmprestimo(){
+        if(emprestimoView.getjTextPesquisaEmprestimo().getText().isBlank()){
+            tabelaEmprestimo();
+        }else{
+            if(emprestimoView.getjCheckBoxMostrarTodos().isSelected()){
+                List<Emprestimo> listaEmprestimo = emprestimoBeans
+                        .pesquisaGeral(emprestimoView.getjTextPesquisaEmprestimo().getText());
+                preencheTabelaEmprestimo(listaEmprestimo);
+            }else{
+                List<Emprestimo> listaEmprestimo = emprestimoBeans
+                        .pesquisaAbertos(emprestimoView.getjTextPesquisaEmprestimo().getText());
+                preencheTabelaEmprestimo(listaEmprestimo);
+            }
+        }
+    }
+    
     public void pesquisaLivro(){
         if(emprestimoView.getjTextPesquisaLivro().getText().isBlank()){
             tabelaLivroDefault();
         }else{
-            preencheTabelaLivro(emprestimoBeans.pesquisaLivro(emprestimoView.getjTextPesquisaLivro().getText()));
+            List<Livro> listaLivro = emprestimoBeans
+                    .pesquisaLivro(emprestimoView.getjTextPesquisaLivro().getText());
+            preencheTabelaLivro(listaLivro);
         }
     }
     
@@ -117,7 +152,9 @@ public class EmprestimoController {
         if(emprestimoView.getjTextPesquisaCliente().getText().isBlank()){
             tabelaClienteDefault();
         }else{
-            preencheTabelaCliente(emprestimoBeans.pesquisaCliente(emprestimoView.getjTextPesquisaCliente().getText()));
+            List<Cliente> listaCliente = emprestimoBeans
+                    .pesquisaCliente(emprestimoView.getjTextPesquisaCliente().getText());
+            preencheTabelaCliente(listaCliente);
         }    
     }
     

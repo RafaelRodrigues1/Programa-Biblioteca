@@ -26,7 +26,6 @@ public class EmprestimoBeans {
     private EmprestimoDao emprestimoDao;
     private ClienteDaoInterface clienteDao;
     private LivroDaoInterface livroDao;
-    private RegistroDao registroDao;
     
 
     public EmprestimoBeans(EmprestimoController emprestimoController) {
@@ -34,7 +33,6 @@ public class EmprestimoBeans {
         emprestimoDao = new EmprestimoDao();
         clienteDao = new ClienteDao();
         livroDao = new LivroDao();
-        registroDao = new RegistroDao();
     }
     
     public Boolean efetuaEmprestimo(Integer idCliente, String nomeCliente, Integer quantidadeEmprestimos,
@@ -44,10 +42,9 @@ public class EmprestimoBeans {
         if(emprestimoDao.efetuaEmprestimo(emprestimo)){
             if(livroDao.emprestaLivro(emprestimo.getLivro()) && 
                     clienteDao.tomaLivroEmprestado(emprestimo.getCliente())){
-                Registro registro = new Registro(emprestimoController.getUsuario(), 
+                    RegistroDao.cadastroRegistro(new Registro(emprestimoController.getUsuario(), 
                     "Empréstimo do livro: " + emprestimo.getLivro().getTitulo()
-                            + " para o Cliente: " + emprestimo.getCliente().getNome());
-                    registroDao.cadastroRegistro(registro);
+                            + " para o Cliente: " + emprestimo.getCliente().getNome()));
                 if(clienteDao.numeroLivros(emprestimo.getCliente()) >= 3){
                     return clienteDao.desautorizaCliente(emprestimo.getCliente());
                 }
@@ -64,10 +61,9 @@ public class EmprestimoBeans {
             if(emprestimoDao.fechaEmprestimo(id)){
                 if(livroDao.devolveLivro(emprestimo.getLivro()) &&
                         clienteDao.devolveLivro(emprestimo.getCliente())){
-                    Registro registro = new Registro(emprestimoController.getUsuario(), 
+                    RegistroDao.cadastroRegistro(new Registro(emprestimoController.getUsuario(), 
                     "Devolução do livro: " + emprestimo.getLivro().getTitulo()
-                            + " do Cliente: " + emprestimo.getCliente().getNome());
-                    registroDao.cadastroRegistro(registro);
+                            + " do Cliente: " + emprestimo.getCliente().getNome()));
                     if(clienteDao.numeroLivros(emprestimo.getCliente()) < 3){
                         return clienteDao.autorizaCliente(emprestimo.getCliente());
                     }
@@ -78,6 +74,14 @@ public class EmprestimoBeans {
         return false;
     }
     
+    public List<Emprestimo> pesquisaGeral(String pesquisa){
+        return emprestimoDao.pesquisaGeral(pesquisa);
+    }
+    
+    public List<Emprestimo> pesquisaAbertos(String pesquisa){
+        return emprestimoDao.pesquisaAbertos(pesquisa);
+    }
+    
     public List<Livro> pesquisaLivro(String pesquisa){
         return livroDao.pesquisarEmprestimo(pesquisa);
     }
@@ -86,8 +90,12 @@ public class EmprestimoBeans {
         return clienteDao.pesquisarEmprestimo(nome);
     }
     
-    public List<Emprestimo> listar(){
-        return emprestimoDao.listar();
+    public List<Emprestimo> listarAbertos(){
+        return emprestimoDao.listarAbertos();
+    }
+    
+    public List<Emprestimo> listarTodos(){
+        return emprestimoDao.listarGeral();
     }
     
     public List<Livro> listarLivro(){

@@ -16,18 +16,16 @@ public class AtividadeController {
     
     private AtividadeView atividadeView;
     private Usuario usuario;
-    private RegistroDao registroDao;
 
     //"Beans" não implementado por quantidade baixa de funcionalidade
     public AtividadeController(AtividadeView atividadeView) {
         this.atividadeView = atividadeView;
-        registroDao = new RegistroDao();
         preencheTabela();
     }
     
     private void preencheTabela(){
         DateTimeFormatter dataHoraForm = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        List<Registro> listaRegistro = registroDao.listar();
+        List<Registro> listaRegistro = RegistroDao.listar();
         DefaultTableModel tableModel = (DefaultTableModel) atividadeView.getjTableAtividades().getModel();
         tableModel.setNumRows(0);
         listaRegistro.forEach(registro -> {
@@ -39,7 +37,7 @@ public class AtividadeController {
     }
     
     public void imprimeRelatorioAtividade(){
-        AtividadePrint print = new AtividadePrint(registroDao.listar());
+        AtividadePrint print = new AtividadePrint(RegistroDao.listar());
         print.run();
     }
 
