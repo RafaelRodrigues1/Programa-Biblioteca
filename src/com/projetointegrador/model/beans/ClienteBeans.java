@@ -2,7 +2,7 @@ package com.projetointegrador.model.beans;
 
 import com.projetointegrador.controller.ClienteController;
 import com.projetointegrador.model.entities.Cliente;
-import com.projetointegrador.printservices.ClientePrint;
+import com.projetointegrador.model.services.printservices.ClientePrint;
 import java.time.LocalDate;
 import java.util.List;
 import java.time.format.DateTimeFormatter;

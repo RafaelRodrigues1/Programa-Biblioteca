@@ -15,7 +15,7 @@ public interface CrudDao<T> {
     Boolean alterar(T t);
     Boolean apagar(Integer t);
     List<T> pesquisar(String pesquisa);
-    List<T> funcaoLista(PreparedStatement prepStatement);
+    List<T> funcaoLista(PreparedStatement prepStatement)throws SQLException;
     T instanciaTipo(ResultSet resultSet)throws SQLException;
     T buscarPorId(Integer busca);
     List<T> listarEmprestimo();

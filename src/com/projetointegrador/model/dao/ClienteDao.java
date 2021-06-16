@@ -11,9 +11,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author RafaelRodrigues1
@@ -116,18 +118,14 @@ public class ClienteDao implements ClienteDaoInterface<Cliente> {
     }
     
     @Override
-    public List<Cliente> funcaoLista(PreparedStatement prepStatement){
-        try{
-            List<Cliente> listaClientes = new ArrayList<>();
-            resultSet = prepStatement.executeQuery();
-            while(resultSet.next()){
-                    Cliente cliente = instanciaTipo(resultSet);
-                    listaClientes.add(cliente);
-                }
-                return listaClientes;
-        }catch(SQLException ex){
-            return null;
-        }
+    public List<Cliente> funcaoLista(PreparedStatement prepStatement) throws SQLException{
+        List<Cliente> listaClientes = new ArrayList<>();
+        resultSet = prepStatement.executeQuery();
+        while(resultSet.next()){
+                Cliente cliente = instanciaTipo(resultSet);
+                listaClientes.add(cliente);
+            }
+            return listaClientes;
     }
     
     @Override
@@ -271,6 +269,29 @@ public class ClienteDao implements ClienteDaoInterface<Cliente> {
             }
             return numeroLivros;
         }catch(SQLException ex){
+            ex.printStackTrace();
+            return null;
+        }finally{
+            DBConnection.closeConnection(resultSet, prepStatement, connection);
+        }
+    }
+
+    @Override
+    public Set<Cliente> verificaAtrasos() {
+        try{
+            long data = LongDate.getLongDate(LocalDate.now());
+            connection = DBConnection.getConnection();
+            prepStatement = connection.prepareStatement(""
+                            +"SELECT  c.*, e.data_prazo_entrega " +
+                            "FROM cliente c " +
+                            "JOIN emprestimo e " +
+                            "ON c.id = e.id_cliente " +
+                            "WHERE e.data_prazo_entrega < ? AND e.aberto = 1;");
+            prepStatement.setDate(1, new Date(data));
+            Set<Cliente> setClientes = Set.copyOf(funcaoLista(prepStatement));
+            return setClientes;
+        }catch(SQLException ex){
+            ex.printStackTrace();
             return null;
         }finally{
             DBConnection.closeConnection(resultSet, prepStatement, connection);

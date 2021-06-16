@@ -52,6 +52,7 @@ public final class MainView extends javax.swing.JFrame {
         jMenuEmprestimos = new javax.swing.JMenu();
         jMenuAtividades = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
+        jMenu1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -130,6 +131,9 @@ public final class MainView extends javax.swing.JFrame {
         jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/projetointegrador/Imagens/DB.png"))); // NOI18N
         jMenu5.setText("Livros DataBase");
         jMenuBar1.add(jMenu5);
+
+        jMenu1.setText("Sobre");
+        jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
@@ -226,6 +230,7 @@ public final class MainView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelLogOut;
     private javax.swing.JLabel jLabelNomeUsuario;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenuAtividades;
     private javax.swing.JMenuBar jMenuBar1;

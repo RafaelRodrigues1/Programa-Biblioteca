@@ -137,19 +137,33 @@ public class EmprestimoView extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, true, true
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
         jScrollPane3.setViewportView(jTableEmprestimos);
         if (jTableEmprestimos.getColumnModel().getColumnCount() > 0) {
+            jTableEmprestimos.getColumnModel().getColumn(0).setResizable(false);
             jTableEmprestimos.getColumnModel().getColumn(0).setPreferredWidth(10);
+            jTableEmprestimos.getColumnModel().getColumn(1).setResizable(false);
             jTableEmprestimos.getColumnModel().getColumn(1).setPreferredWidth(150);
+            jTableEmprestimos.getColumnModel().getColumn(2).setResizable(false);
             jTableEmprestimos.getColumnModel().getColumn(2).setPreferredWidth(10);
+            jTableEmprestimos.getColumnModel().getColumn(3).setResizable(false);
             jTableEmprestimos.getColumnModel().getColumn(3).setPreferredWidth(150);
+            jTableEmprestimos.getColumnModel().getColumn(4).setResizable(false);
             jTableEmprestimos.getColumnModel().getColumn(4).setPreferredWidth(25);
+            jTableEmprestimos.getColumnModel().getColumn(5).setResizable(false);
             jTableEmprestimos.getColumnModel().getColumn(5).setPreferredWidth(65);
+            jTableEmprestimos.getColumnModel().getColumn(6).setResizable(false);
             jTableEmprestimos.getColumnModel().getColumn(6).setPreferredWidth(55);
         }
 

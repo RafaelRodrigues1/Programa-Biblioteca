@@ -15,6 +15,7 @@ import com.projetointegrador.views.Panes;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author RafaelRodrigues1
@@ -22,10 +23,10 @@ import java.util.List;
 public class EmprestimoBeans {
     
     private final Double MULTA_DIA = 5d;
-    private EmprestimoController emprestimoController;
-    private EmprestimoDao emprestimoDao;
-    private ClienteDaoInterface clienteDao;
-    private LivroDaoInterface livroDao;
+    private final EmprestimoController emprestimoController;
+    private final EmprestimoDao emprestimoDao;
+    private final ClienteDaoInterface<Cliente> clienteDao;
+    private final LivroDaoInterface<Livro> livroDao;
     
 
     public EmprestimoBeans(EmprestimoController emprestimoController) {
@@ -45,7 +46,7 @@ public class EmprestimoBeans {
                     RegistroDao.cadastroRegistro(new Registro(emprestimoController.getUsuario(), 
                     "Empréstimo do livro: " + emprestimo.getLivro().getTitulo()
                             + " para o Cliente: " + emprestimo.getCliente().getNome()));
-                if(clienteDao.numeroLivros(emprestimo.getCliente()) >= 3){
+                if(clienteDao.buscarPorId(emprestimo.getCliente().getId()).getNumeroLivros() >= 3){
                     return clienteDao.desautorizaCliente(emprestimo.getCliente());
                 }
                 return true;
@@ -56,7 +57,6 @@ public class EmprestimoBeans {
     
     public Boolean devolveLivro(Integer id){
         Emprestimo emprestimo = emprestimoDao.buscarPorId(id);
-        
         if(calculaMulta(emprestimo)){
             if(emprestimoDao.fechaEmprestimo(id)){
                 if(livroDao.devolveLivro(emprestimo.getLivro()) &&
@@ -64,7 +64,8 @@ public class EmprestimoBeans {
                     RegistroDao.cadastroRegistro(new Registro(emprestimoController.getUsuario(), 
                     "Devolução do livro: " + emprestimo.getLivro().getTitulo()
                             + " do Cliente: " + emprestimo.getCliente().getNome()));
-                    if(clienteDao.numeroLivros(emprestimo.getCliente()) < 3){
+                    if(clienteDao.buscarPorId(emprestimo.getCliente().getId()).getNumeroLivros() < 3 
+                            && verificaClienteAtrasado(emprestimo.getCliente())){
                         return clienteDao.autorizaCliente(emprestimo.getCliente());
                     }
                 }
@@ -72,6 +73,11 @@ public class EmprestimoBeans {
             }
         }
         return false;
+    }
+    
+    private Boolean verificaClienteAtrasado(Cliente cliente){
+        Set<Cliente> setCliente = clienteDao.verificaAtrasos();
+        return !setCliente.contains(cliente);
     }
     
     public List<Emprestimo> pesquisaGeral(String pesquisa){

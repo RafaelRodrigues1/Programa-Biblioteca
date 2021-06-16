@@ -34,13 +34,13 @@ public class EmprestimoController {
         try{
             if(emprestimoView.getjTableClientes().getSelectedRow()>=0 &&
                     emprestimoView.getjTableLivros().getSelectedRow()>=0){
-                Integer rowCliente = emprestimoView.getjTableClientes().getSelectedRow();
-                Integer rowLivro = emprestimoView.getjTableLivros().getSelectedRow();
+                int rowCliente = emprestimoView.getjTableClientes().getSelectedRow();
+                int rowLivro = emprestimoView.getjTableLivros().getSelectedRow();
                 Integer idCliente = (int) emprestimoView.getjTableClientes().getValueAt(rowCliente, 0);
                 String nomeCliente = emprestimoView.getjTableClientes().getValueAt(rowCliente, 1).toString();
                 String maiorIdade = emprestimoView.getjTableClientes().getValueAt(rowCliente, 2).toString();
-                Integer quantidadeEmprestimos = (int) emprestimoView.getjTableClientes().getValueAt(rowCliente, 3);
-                Integer codLivro = (int) emprestimoView.getjTableLivros().getValueAt(rowLivro, 0);
+                int quantidadeEmprestimos = (int) emprestimoView.getjTableClientes().getValueAt(rowCliente, 3);
+                int codLivro = (int) emprestimoView.getjTableLivros().getValueAt(rowLivro, 0);
                 String tituloLivro = emprestimoView.getjTableLivros().getValueAt(rowLivro, 1).toString();
                 String restricaoEtaria = emprestimoView.getjTableLivros().getValueAt(rowLivro, 2).toString();
                 if(!(restricaoEtaria.equals("Sim") && maiorIdade.equals("Não"))){
@@ -69,8 +69,8 @@ public class EmprestimoController {
         try{
             if(!emprestimoView.getjCheckBoxMostrarTodos().isSelected()){
                 if(emprestimoView.getjTableEmprestimos().getSelectedRow()>=0){
-                Integer row = emprestimoView.getjTableEmprestimos().getSelectedRow();
-                Integer codigo = (int) emprestimoView.getjTableEmprestimos().getValueAt(row, 0);
+                int row = emprestimoView.getjTableEmprestimos().getSelectedRow();
+                int codigo = (int) emprestimoView.getjTableEmprestimos().getValueAt(row, 0);
                     if(emprestimoBeans.devolveLivro(codigo)){
                         Panes.mostraMsg("Livro devolvido com sucesso!");
                         telaDefault();

@@ -126,18 +126,14 @@ public class LivroDao implements LivroDaoInterface<Livro> {
     }
 
     @Override
-    public List<Livro> funcaoLista(PreparedStatement prepStatement) {
-        try {
-            List<Livro> listaLivros = new ArrayList<>();
-            resultSet = prepStatement.executeQuery();
-            while (resultSet.next()) {
-                Livro livro = instanciaTipo(resultSet);
-                listaLivros.add(livro);
-            }
-            return listaLivros;
-        } catch (SQLException ex) {
-            return null;
+    public List<Livro> funcaoLista(PreparedStatement prepStatement) throws SQLException {
+        List<Livro> listaLivros = new ArrayList<>();
+        resultSet = prepStatement.executeQuery();
+        while (resultSet.next()) {
+            Livro livro = instanciaTipo(resultSet);
+            listaLivros.add(livro);
         }
+        return listaLivros;
     }
 
     @Override

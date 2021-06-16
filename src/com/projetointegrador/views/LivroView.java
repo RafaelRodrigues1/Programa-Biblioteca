@@ -71,55 +71,81 @@ public class LivroView extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jTextPesquisa = new javax.swing.JTextField();
         jCheckRestricaoEtaria = new javax.swing.JCheckBox();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Título:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Autor:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Gênero:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 90, -1, -1));
 
-        jLabel5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Editora:");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 190, -1, -1));
 
-        jLabel6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Edição:");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, -1, -1));
 
-        jLabel10.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Anotações:");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 190, -1, -1));
 
-        jCheckAlugavel.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jCheckAlugavel.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jCheckAlugavel.setForeground(new java.awt.Color(0, 0, 0));
         jCheckAlugavel.setText("Alugável:");
         jCheckAlugavel.setToolTipText("");
         jCheckAlugavel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jCheckAlugavel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        getContentPane().add(jCheckAlugavel, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, 119, -1));
 
         jTextAnotacoes.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jScrollPane1.setViewportView(jTextAnotacoes);
 
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 190, 240, 76));
+
         jTextTitulo.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        getContentPane().add(jTextTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 280, -1));
 
         jTextAutor.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        getContentPane().add(jTextAutor, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, 280, -1));
 
         jTextEditora.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        getContentPane().add(jTextEditora, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, 230, -1));
 
         jTextEdicao.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        getContentPane().add(jTextEdicao, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 240, 140, -1));
 
         jComboGenero.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jComboGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{}));
+        getContentPane().add(jComboGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 90, 158, -1));
 
-        jButtonCadastrar.setFont(new java.awt.Font("SansSerif", 1, 20)); // NOI18N
+        jButtonCadastrar.setFont(new java.awt.Font("Quicksand", 1, 17)); // NOI18N
+        jButtonCadastrar.setForeground(new java.awt.Color(0, 0, 0));
         jButtonCadastrar.setText("Cadastrar");
         jButtonCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCadastrarActionPerformed(evt);
             }
         });
+        getContentPane().add(jButtonCadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 600, 120, -1));
 
         jTableLivros.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTableLivros.setModel(new javax.swing.table.DefaultTableModel(
@@ -169,32 +195,42 @@ public class LivroView extends javax.swing.JFrame {
             jTableLivros.getColumnModel().getColumn(8).setPreferredWidth(55);
         }
 
-        jButtonVoltar.setFont(new java.awt.Font("SansSerif", 1, 20)); // NOI18N
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 786, 270));
+
+        jButtonVoltar.setFont(new java.awt.Font("Quicksand", 1, 17)); // NOI18N
+        jButtonVoltar.setForeground(new java.awt.Color(0, 0, 0));
         jButtonVoltar.setText("Voltar");
         jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonVoltarActionPerformed(evt);
             }
         });
+        getContentPane().add(jButtonVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 110, -1));
 
-        jButtonAlterar.setFont(new java.awt.Font("SansSerif", 1, 20)); // NOI18N
+        jButtonAlterar.setFont(new java.awt.Font("Quicksand", 1, 17)); // NOI18N
+        jButtonAlterar.setForeground(new java.awt.Color(0, 0, 0));
         jButtonAlterar.setText("Alterar");
         jButtonAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAlterarActionPerformed(evt);
             }
         });
+        getContentPane().add(jButtonAlterar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 600, 120, -1));
 
-        jButtonApagar.setFont(new java.awt.Font("SansSerif", 1, 20)); // NOI18N
+        jButtonApagar.setFont(new java.awt.Font("Quicksand", 1, 17)); // NOI18N
+        jButtonApagar.setForeground(new java.awt.Color(0, 0, 0));
         jButtonApagar.setText("Apagar");
         jButtonApagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonApagarActionPerformed(evt);
             }
         });
+        getContentPane().add(jButtonApagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 600, 120, -1));
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Pesquisa:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 30, -1, -1));
 
         jTextPesquisa.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jTextPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -202,121 +238,21 @@ public class LivroView extends javax.swing.JFrame {
                 jTextPesquisaKeyReleased(evt);
             }
         });
+        getContentPane().add(jTextPesquisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 30, 260, -1));
 
-        jCheckRestricaoEtaria.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jCheckRestricaoEtaria.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jCheckRestricaoEtaria.setForeground(new java.awt.Color(0, 0, 0));
         jCheckRestricaoEtaria.setText("Restrição etária");
         jCheckRestricaoEtaria.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jCheckRestricaoEtaria.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        getContentPane().add(jCheckRestricaoEtaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 140, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(48, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 786, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(35, 35, 35)
-                                        .addComponent(jTextAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel5)
-                                            .addComponent(jLabel6))
-                                        .addGap(79, 79, 79)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jTextEditora, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jTextEdicao, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(jLabel1)
-                                    .addGap(35, 35, 35)
-                                    .addComponent(jTextTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jButtonVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(73, 73, 73)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel4)
-                                    .addGap(6, 6, 6)
-                                    .addComponent(jComboGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jCheckAlugavel, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jCheckRestricaoEtaria))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel10)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                .addGap(71, 71, 71))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(241, 241, 241)
-                .addComponent(jButtonCadastrar)
-                .addGap(90, 90, 90)
-                .addComponent(jButtonAlterar)
-                .addGap(89, 89, 89)
-                .addComponent(jButtonApagar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonVoltar))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextEditora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextEdicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(5, 5, 5)
-                                .addComponent(jLabel4))
-                            .addComponent(jComboGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckRestricaoEtaria)
-                            .addComponent(jCheckAlugavel))
-                        .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonApagar)
-                    .addComponent(jButtonAlterar)
-                    .addComponent(jButtonCadastrar))
-                .addContainerGap(21, Short.MAX_VALUE))
-        );
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/projetointegrador/Imagens/painel livros.png"))); // NOI18N
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 830, -1));
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/projetointegrador/Imagens/fundoLivros.png"))); // NOI18N
+        jLabel7.setText("jLabel7");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 650));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -446,6 +382,8 @@ public class LivroView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableLivros;

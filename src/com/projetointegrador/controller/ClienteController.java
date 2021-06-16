@@ -7,11 +7,13 @@ import com.projetointegrador.views.ClienteView;
 import com.projetointegrador.views.MainView;
 import com.projetointegrador.views.Panes;
 import java.awt.Color;
+import java.text.ParseException;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.table.DefaultTableModel;
 import java.time.format.DateTimeFormatter;
+import javax.swing.text.MaskFormatter;
 
 /**
  * @author RafaelRodrigues1
@@ -191,8 +193,21 @@ public class ClienteController {
         clienteView.getjFormattedTextCPF().setText(cpf);
     }
     
-    public void emailToLowCase(){
-        clienteView.getjTextEmail().setText(clienteView.getjTextEmail().getText().toLowerCase());
+    public void formataDataCpfTelefone(){
+        try {
+            MaskFormatter maskCPF = new MaskFormatter("###.***.***-##");
+            MaskFormatter maskData = new MaskFormatter("##/##/####");
+            MaskFormatter maskTelefone = new MaskFormatter("(##)# ####-####");
+            maskCPF.install(clienteView.getjFormattedTextCPF());
+            maskData.install(clienteView.getjFormattedTextData());
+            maskTelefone.install(clienteView.getjFormattedTextTelefone());
+        } catch (ParseException ex) {
+            Panes.mostraMsg("Formato de data ou telefone inválido");
+        }
+    }
+    
+    public void formataEmail(){
+        clienteView.getjTextEmail().setText(clienteView.getjTextEmail().getText().toLowerCase().trim());
     }
     
     public void imprimeRelatorioCliente(){

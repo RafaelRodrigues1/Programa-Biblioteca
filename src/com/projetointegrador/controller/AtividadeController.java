@@ -3,7 +3,7 @@ package com.projetointegrador.controller;
 import com.projetointegrador.model.dao.RegistroDao;
 import com.projetointegrador.model.entities.Registro;
 import com.projetointegrador.model.entities.Usuario;
-import com.projetointegrador.printservices.AtividadePrint;
+import com.projetointegrador.model.services.printservices.AtividadePrint;
 import com.projetointegrador.views.AtividadeView;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;

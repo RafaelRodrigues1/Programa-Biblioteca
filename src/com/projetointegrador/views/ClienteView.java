@@ -20,22 +20,9 @@ public final class ClienteView extends javax.swing.JFrame {
     public ClienteView() {
         initComponents();
         setLocationRelativeTo(null);
-        formataDataCpfTelefone();
         clienteController = new ClienteController(this);
         clienteController.tabelaDefault();
-    }
-    
-    public void formataDataCpfTelefone(){
-        try {
-            MaskFormatter maskCPF = new MaskFormatter("###.***.***-##");
-            MaskFormatter maskData = new MaskFormatter("##/##/####");
-            MaskFormatter maskTelefone = new MaskFormatter("(##)# ####-####");
-            maskCPF.install(jFormattedTextCPF);
-            maskData.install(jFormattedTextData);
-            maskTelefone.install(jFormattedTextTelefone);
-        } catch (ParseException ex) {
-            Panes.mostraMsg("Formato de data ou telefone inválido");
-        }
+        clienteController.formataDataCpfTelefone();
     }
 
     /**
@@ -239,7 +226,7 @@ public final class ClienteView extends javax.swing.JFrame {
             jTableClientes.getColumnModel().getColumn(3).setPreferredWidth(120);
             jTableClientes.getColumnModel().getColumn(4).setPreferredWidth(60);
             jTableClientes.getColumnModel().getColumn(5).setResizable(false);
-            jTableClientes.getColumnModel().getColumn(5).setPreferredWidth(30);
+            jTableClientes.getColumnModel().getColumn(5).setPreferredWidth(25);
         }
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 750, 200));
@@ -275,7 +262,7 @@ public final class ClienteView extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableClientesKeyReleased
 
     private void jTextEmailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextEmailKeyReleased
-        clienteController.emailToLowCase();
+        clienteController.formataEmail();
     }//GEN-LAST:event_jTextEmailKeyReleased
 
     private void jTextPesquisaNomeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextPesquisaNomeKeyReleased

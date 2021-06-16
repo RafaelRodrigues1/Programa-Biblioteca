@@ -153,31 +153,6 @@ public class EmprestimoDao {
             DBConnection.closeConnection(resultSet, prepStatement, connection);
         }
     }
-    
-    /**
-     * 
-     * @param cliente
-     * @return true se o cliente estiver com 3 ou mais livros
-     */  //NÃO USADO
-    public Boolean verificaQuantidadeLivrosCliente(Cliente cliente) { 
-        try {
-            connection = DBConnection.getConnection();
-            prepStatement = connection.prepareStatement("SELECT * from emprestimo "
-                    + "WHERE id_cliente = ? AND aberto = true ;");
-            prepStatement.setInt(1, cliente.getId());
-            resultSet = prepStatement.executeQuery();
-            int rowsAffected = 0;
-            while (resultSet.next()) {
-                rowsAffected++;
-            }
-            return rowsAffected >= 3; //Quantidade máxima de livros
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return false;
-        } finally {
-            DBConnection.closeConnection(resultSet, prepStatement, connection);
-        }
-    }
 
     private List<Emprestimo> funcaoLista(PreparedStatement prepStatement) {
         try {

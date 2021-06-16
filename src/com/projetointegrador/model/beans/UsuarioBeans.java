@@ -15,8 +15,8 @@ public class UsuarioBeans {
     
     
     private final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");  
-    private UsuarioDao usuarioDao;
-    private UsuarioController usuarioController;
+    private final UsuarioDao usuarioDao;
+    private final UsuarioController usuarioController;
 
     public UsuarioBeans(UsuarioController usuarioController) {
         this.usuarioController = usuarioController;

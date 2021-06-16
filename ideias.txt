@@ -6,9 +6,12 @@ implements Serializable
 
 Notificação a partir de 2 dias antes do prazo de entrega(service email)
 serviço de Email(enviar de um gmail, criar um). 
-https://www.youtube.com/watch?v=-ok1AKsMNyQ&list=PLJIP7GdByOyuBKB--fIO2DoQaPVXm9lCw&index=13
 criar interface para a Classe EmailGmail implementar.
 criar classe para formatação dos textos do email
 na mesma classe, criar objeto de tipo EmailGmail para enviar
 (métodos- notificacaoEmprestimo:void, notificacaoAtraso:void,
  formatacaoEmprestimo:String, formatacaoAtraso:String)
+
+Criar uma tabela no BD para verificação de envio de emails no dia, colunas(id, data date)
+Programa verifica se há o registro do dia nessa tabela, se n houver(se retornar nenhuma linha afetada),
+o programa envia os emails para quem está com pendências
