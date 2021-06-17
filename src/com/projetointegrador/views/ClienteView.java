@@ -232,7 +232,7 @@ public final class ClienteView extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 750, 200));
 
         jFormattedTextCPF.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        getContentPane().add(jFormattedTextCPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 200, 110, -1));
+        getContentPane().add(jFormattedTextCPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 200, 130, -1));
 
         jFormattedTextTelefone.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jFormattedTextTelefone.setText("(  )      -    ");

@@ -30,6 +30,7 @@ public class AtividadesDiariasDao {
             return rowsAffected == 1;
         }catch(SQLException ex){
             System.out.println(ex.getMessage());
+            System.out.println("As atividades de hoje já foram concluídas");
             return false;
         }finally{
             DBConnection.closeConnection(prepStatement, connection);

@@ -28,7 +28,7 @@ public class EmprestimoDao {
     public List<Emprestimo> listarGeral() {
         try {
             connection = DBConnection.getConnection();
-            prepStatement = connection.prepareCall("SELECT e.*, c.nome nome_cliente, c.quantidade_livros,"
+            prepStatement = connection.prepareCall("SELECT e.*, c.nome nome_cliente, c.email, c.quantidade_livros,"
                     + " l.titulo titulo_livro "
                     + "FROM emprestimo e JOIN (cliente c, livro l) "
                     + "ON c.id=e.id_cliente and l.codigo=e.codigo_livro;");
@@ -44,7 +44,7 @@ public class EmprestimoDao {
     public List<Emprestimo> listarAbertos() {
         try {
             connection = DBConnection.getConnection();
-            prepStatement = connection.prepareCall("SELECT e.*, c.nome nome_cliente, c.quantidade_livros,"
+            prepStatement = connection.prepareCall("SELECT e.*, c.nome nome_cliente, c.email, c.quantidade_livros,"
                     + " l.titulo titulo_livro "
                     + "FROM emprestimo e JOIN (cliente c, livro l) "
                     + "ON c.id=e.id_cliente and l.codigo=e.codigo_livro WHERE e.aberto = true;");
@@ -60,7 +60,7 @@ public class EmprestimoDao {
     public List<Emprestimo> pesquisaGeral(String pesquisa) {
         try {
             connection = DBConnection.getConnection();
-            prepStatement = connection.prepareCall("SELECT e.*, c.nome nome_cliente, c.quantidade_livros,"
+            prepStatement = connection.prepareCall("SELECT e.*, c.nome nome_cliente, c.email, c.quantidade_livros,"
                     + " l.titulo titulo_livro "
                     + "FROM emprestimo e JOIN (cliente c, livro l) "
                     + "ON c.id=e.id_cliente and l.codigo=e.codigo_livro "
@@ -80,7 +80,7 @@ public class EmprestimoDao {
     public List<Emprestimo> pesquisaAbertos(String pesquisa) {
         try {
             connection = DBConnection.getConnection();
-            prepStatement = connection.prepareCall("SELECT e.*, c.nome nome_cliente, c.quantidade_livros,"
+            prepStatement = connection.prepareCall("SELECT e.*, c.nome nome_cliente, c.email, c.quantidade_livros,"
                     + " l.titulo titulo_livro "
                     + "FROM emprestimo e JOIN (cliente c, livro l) "
                     + "ON c.id=e.id_cliente and l.codigo=e.codigo_livro "
@@ -119,7 +119,7 @@ public class EmprestimoDao {
     public Emprestimo buscarPorId(Integer id){
         try{
             connection = DBConnection.getConnection();
-            prepStatement = connection.prepareStatement("SELECT e.*, c.nome nome_cliente, c.quantidade_livros, "
+            prepStatement = connection.prepareStatement("SELECT e.*, c.nome nome_cliente, c.email, c.quantidade_livros, "
                     + "l.titulo titulo_livro "
                      +"FROM emprestimo e JOIN (cliente c, livro l)"
                      +"ON c.id=e.id_cliente and l.codigo=e.codigo_livro WHERE e.codigo = ? ;");
@@ -171,7 +171,7 @@ public class EmprestimoDao {
 
     private Emprestimo instanciaTipo(ResultSet resultSet) throws SQLException {
         Cliente cliente = new Cliente(resultSet.getInt("id_cliente"), resultSet.getString("nome_cliente"), 
-                resultSet.getInt("quantidade_livros"));
+                resultSet.getString("email"), resultSet.getInt("quantidade_livros"));
         Livro livro = new Livro(resultSet.getString("titulo_livro"), resultSet.getInt("codigo_livro"));
         Emprestimo emprestimo = new Emprestimo(
                 resultSet.getInt("codigo"), cliente, livro,

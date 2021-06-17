@@ -58,7 +58,8 @@ public final class MainView extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabelNomeUsuario.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabelNomeUsuario.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        jLabelNomeUsuario.setForeground(new java.awt.Color(0, 0, 0));
         jLabelNomeUsuario.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabelNomeUsuario.setToolTipText("");
         jLabelNomeUsuario.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -86,12 +87,17 @@ public final class MainView extends javax.swing.JFrame {
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, -20, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/projetointegrador/Imagens/mainNotebook.jpg.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -90, 970, 670));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -50, 970, 630));
 
+        jMenuBar1.setBackground(new java.awt.Color(204, 255, 255));
+
+        jMenuClientes.setBackground(new java.awt.Color(204, 255, 255));
+        jMenuClientes.setForeground(new java.awt.Color(0, 0, 0));
         jMenuClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/projetointegrador/Imagens/Clientes1.png"))); // NOI18N
         jMenuClientes.setText("Clientes");
         jMenuClientes.setAutoscrolls(true);
         jMenuClientes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jMenuClientes.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jMenuClientes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jMenuClientes.setIconTextGap(6);
         jMenuClientes.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -101,8 +107,11 @@ public final class MainView extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenuClientes);
 
+        jMenuLivros.setBackground(new java.awt.Color(204, 255, 255));
+        jMenuLivros.setForeground(new java.awt.Color(0, 0, 0));
         jMenuLivros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/projetointegrador/Imagens/livros.png"))); // NOI18N
         jMenuLivros.setText(" Livros");
+        jMenuLivros.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jMenuLivros.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jMenuLivrosMouseClicked(evt);
@@ -110,8 +119,11 @@ public final class MainView extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenuLivros);
 
+        jMenuEmprestimos.setBackground(new java.awt.Color(204, 255, 255));
+        jMenuEmprestimos.setForeground(new java.awt.Color(0, 0, 0));
         jMenuEmprestimos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/projetointegrador/Imagens/Empréstimo.png"))); // NOI18N
         jMenuEmprestimos.setText("Empréstimos");
+        jMenuEmprestimos.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jMenuEmprestimos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jMenuEmprestimosMouseClicked(evt);
@@ -119,8 +131,11 @@ public final class MainView extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenuEmprestimos);
 
+        jMenuAtividades.setBackground(new java.awt.Color(204, 255, 255));
+        jMenuAtividades.setForeground(new java.awt.Color(0, 0, 0));
         jMenuAtividades.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/projetointegrador/Imagens/Atividades.png"))); // NOI18N
         jMenuAtividades.setText("Atividades");
+        jMenuAtividades.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jMenuAtividades.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jMenuAtividadesMouseClicked(evt);
@@ -128,11 +143,16 @@ public final class MainView extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenuAtividades);
 
+        jMenu5.setBackground(new java.awt.Color(204, 255, 255));
+        jMenu5.setForeground(new java.awt.Color(0, 0, 0));
         jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/projetointegrador/Imagens/DB.png"))); // NOI18N
         jMenu5.setText("Livros DataBase");
+        jMenu5.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jMenuBar1.add(jMenu5);
 
+        jMenu1.setForeground(new java.awt.Color(0, 0, 0));
         jMenu1.setText("Sobre");
+        jMenu1.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);

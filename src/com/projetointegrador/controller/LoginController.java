@@ -12,8 +12,8 @@ import com.projetointegrador.views.Panes;
  */
 public class LoginController {
     
-    private LoginView loginView;
-    private LoginBeans loginBeans;
+    private final LoginView loginView;
+    private final LoginBeans loginBeans;
     private UsuarioView cadastroUsuarioView;
 
     public LoginController(LoginView loginView) {

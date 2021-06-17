@@ -48,6 +48,7 @@ public class EmprestimoView extends javax.swing.JFrame {
         jCheckMostrarTodos = new javax.swing.JCheckBox();
         jLabel4 = new javax.swing.JLabel();
         jTextPesquisaEmprestimo = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
@@ -57,6 +58,7 @@ public class EmprestimoView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTableLivros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -90,6 +92,8 @@ public class EmprestimoView extends javax.swing.JFrame {
             jTableLivros.getColumnModel().getColumn(2).setResizable(false);
             jTableLivros.getColumnModel().getColumn(2).setPreferredWidth(60);
         }
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(688, 113, 360, 193));
 
         jTableClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -125,6 +129,8 @@ public class EmprestimoView extends javax.swing.JFrame {
             jTableClientes.getColumnModel().getColumn(3).setResizable(false);
             jTableClientes.getColumnModel().getColumn(3).setPreferredWidth(60);
         }
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 113, 413, 193));
 
         jTableEmprestimos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -167,35 +173,50 @@ public class EmprestimoView extends javax.swing.JFrame {
             jTableEmprestimos.getColumnModel().getColumn(6).setPreferredWidth(55);
         }
 
-        jLabel1.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
-        jLabel1.setText("Empréstimo");
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 358, 1030, 220));
 
-        jButtonVoltar.setFont(new java.awt.Font("SansSerif", 0, 20)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Empréstimos");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 10, -1, -1));
+
+        jButtonVoltar.setBackground(new java.awt.Color(153, 153, 153));
+        jButtonVoltar.setFont(new java.awt.Font("Quicksand", 1, 17)); // NOI18N
+        jButtonVoltar.setForeground(new java.awt.Color(0, 0, 0));
         jButtonVoltar.setText("Voltar");
         jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonVoltarActionPerformed(evt);
             }
         });
+        getContentPane().add(jButtonVoltar, new org.netbeans.lib.awtextra.AbsoluteConstraints(73, 15, 110, -1));
 
-        jButtonEfetuarEmprestimo.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jButtonEfetuarEmprestimo.setBackground(new java.awt.Color(153, 153, 153));
+        jButtonEfetuarEmprestimo.setFont(new java.awt.Font("Quicksand", 1, 16)); // NOI18N
+        jButtonEfetuarEmprestimo.setForeground(new java.awt.Color(0, 0, 0));
         jButtonEfetuarEmprestimo.setText("Efetuar Empréstimo");
         jButtonEfetuarEmprestimo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonEfetuarEmprestimoActionPerformed(evt);
             }
         });
+        getContentPane().add(jButtonEfetuarEmprestimo, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 130, 190, 30));
 
-        jButtonDevolveLivro.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jButtonDevolveLivro.setBackground(new java.awt.Color(153, 153, 153));
+        jButtonDevolveLivro.setFont(new java.awt.Font("Quicksand", 1, 17)); // NOI18N
+        jButtonDevolveLivro.setForeground(new java.awt.Color(0, 0, 0));
         jButtonDevolveLivro.setText("Devolver Livro");
         jButtonDevolveLivro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonDevolveLivroActionPerformed(evt);
             }
         });
+        getContentPane().add(jButtonDevolveLivro, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 200, 190, 30));
 
-        jLabel2.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Pesquisa: ");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 76, -1, -1));
 
         jTextPesquisaCliente.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jTextPesquisaCliente.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -203,9 +224,12 @@ public class EmprestimoView extends javax.swing.JFrame {
                 jTextPesquisaClienteKeyReleased(evt);
             }
         });
+        getContentPane().add(jTextPesquisaCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 74, 321, -1));
 
-        jLabel3.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Pesquisa:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(688, 76, -1, -1));
 
         jTextPesquisaLivro.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jTextPesquisaLivro.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -213,8 +237,10 @@ public class EmprestimoView extends javax.swing.JFrame {
                 jTextPesquisaLivroKeyReleased(evt);
             }
         });
+        getContentPane().add(jTextPesquisaLivro, new org.netbeans.lib.awtextra.AbsoluteConstraints(776, 74, 272, -1));
 
-        jCheckMostrarTodos.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        jCheckMostrarTodos.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
+        jCheckMostrarTodos.setForeground(new java.awt.Color(0, 0, 0));
         jCheckMostrarTodos.setText("Mostrar todos");
         jCheckMostrarTodos.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         jCheckMostrarTodos.addActionListener(new java.awt.event.ActionListener() {
@@ -222,9 +248,12 @@ public class EmprestimoView extends javax.swing.JFrame {
                 jCheckMostrarTodosActionPerformed(evt);
             }
         });
+        getContentPane().add(jCheckMostrarTodos, new org.netbeans.lib.awtextra.AbsoluteConstraints(307, 318, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Pesquisa:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(688, 320, -1, -1));
 
         jTextPesquisaEmprestimo.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jTextPesquisaEmprestimo.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -232,77 +261,10 @@ public class EmprestimoView extends javax.swing.JFrame {
                 jTextPesquisaEmprestimoKeyReleased(evt);
             }
         });
+        getContentPane().add(jTextPesquisaEmprestimo, new org.netbeans.lib.awtextra.AbsoluteConstraints(776, 318, 272, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane3)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextPesquisaCliente))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckMostrarTodos, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextPesquisaLivro))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextPesquisaEmprestimo)))))
-                .addGap(18, 18, 18))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(73, 73, 73)
-                .addComponent(jButtonVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 283, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jButtonEfetuarEmprestimo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonDevolveLivro, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(420, 420, 420))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jButtonVoltar))
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextPesquisaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextPesquisaLivro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonEfetuarEmprestimo)
-                        .addGap(39, 39, 39)
-                        .addComponent(jButtonDevolveLivro)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jTextPesquisaEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckMostrarTodos))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14))
-        );
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/projetointegrador/Imagens/fundoEmprestimos.png"))); // NOI18N
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -418,6 +380,7 @@ public class EmprestimoView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

@@ -50,6 +50,13 @@ public class Cliente extends Pessoa  {
         this.id = id;
         this.numeroLivros = numeroLivros;
     }
+    
+    public Cliente(Integer id, String nome, String email, Integer numeroLivros) {
+        super(nome);
+        this.id = id;
+        this.email = email;
+        this.numeroLivros = numeroLivros;
+    }
 
         //Construtor para Empréstimo
     public Cliente(Integer id, String nome) {

@@ -2,7 +2,6 @@ package com.projetointegrador.model.beans;
 
 import com.projetointegrador.controller.LoginController;
 import com.projetointegrador.model.dao.UsuarioDao;
-import com.projetointegrador.views.MainView;
 import com.projetointegrador.model.entities.Usuario;
 
 /**
@@ -20,7 +19,8 @@ public class LoginBeans {
     
     public Boolean entrar(Usuario usuario){
         if(usuarioDao.autenticaUsuario(usuario)){
-            AtividadesDiariasBeans.startAtividades();
+            AtividadesDiariasBeans atividade = new AtividadesDiariasBeans();
+            atividade.start();
             return true;
         }
         return false;

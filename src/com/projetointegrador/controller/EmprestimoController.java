@@ -159,6 +159,7 @@ public class EmprestimoController {
     }
     
     private void preencheTabelaEmprestimo(List<Emprestimo> listaEmprestimo){
+        listaEmprestimo.sort((e1, e2) -> e1.getCodigo().compareTo(e2.getCodigo()));
         DefaultTableModel tableModel = (DefaultTableModel) emprestimoView.getjTableEmprestimos().getModel();
         tableModel.setNumRows(0);
         DateTimeFormatter sdf = DateTimeFormatter.ofPattern("dd/MM/yyyy"); 

@@ -14,7 +14,7 @@ import com.projetointegrador.views.Panes;
 public class MainController {
     
     private static final Usuario admin = new Usuario("admin", "123admin456");
-    private MainView mainView;
+    private final MainView mainView;
     private Usuario usuario;
     private LoginView loginView;
     private LivroView livroView;

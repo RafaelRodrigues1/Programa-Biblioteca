@@ -16,29 +16,18 @@ import java.util.stream.Collectors;
 /**
  * @author RafaelRodrigues1
  */
-public class AtividadesDiariasBeans {
+public class AtividadesDiariasBeans extends Thread{
     
-    private static String nomeCliente;
-    
-    private static final String MSGATRASADO = "Prezado(a) " + nomeCliente + ",\nVerificamos um atraso na entrega "
-            + "de livro(s) em seu nome.\nPedimos a você que nos procure para a melhor solução da situação \ne para "
-            + "que você volte, o mais rápido possível, a aproveitar dos nossos serviços.\n\n"
-            + "Atenciosamente,\nEquipe Biblioteca Livros.";
-    private static final String MSGAVISOAMANHA = "Prezado(a) " + nomeCliente + ",\nO prazo de entrega do livro "
-            + "vence amanhã.\nEsteja sempre em dia com a nossa biblioteca para poder aproveitar dos nossos serviços sempre."
-            + "\n\nAtenciosamente,\nEquipe Biblioteca Livros.";
-    private static final String MSGAVISOHOJE = "Prezado(a) " + nomeCliente + ",\nO prazo de entrega do livro "
-            + "vence hoje.\nEsteja sempre em dia com a nossa biblioteca para poder aproveitar dos nossos serviços sempre."
-            + "\n\nAtenciosamente,\nEquipe Biblioteca Livros.";
-    
-    private static final EmprestimoDao emprestimoDao = new EmprestimoDao();
-    private static final ClienteDaoInterface clienteDao = new ClienteDao();
-    private static List<Emprestimo> listaEmprestimo;
-//    private final LivroDaoInterface livroDao;
-    
-    public static void startAtividades(){
-        if(AtividadesDiariasDao.insereDia()){
-            listaEmprestimo = emprestimoDao.listarAbertos();
+    private static EmprestimoDao emprestimoDao;
+    private static ClienteDaoInterface clienteDao;
+    private static List<Emprestimo> listEmprestimo;
+
+    @Override
+    public void run(){
+        if(AtividadesDiariasDao.insereDia()){  
+            emprestimoDao = new EmprestimoDao();
+            clienteDao = new ClienteDao();
+            listEmprestimo = emprestimoDao.listarAbertos();
             desautorizaAtrasadosAuto();
             enviaEmails();
         }
@@ -54,28 +43,40 @@ public class AtividadesDiariasBeans {
         List<Cliente> listAvisoDias = listaAvisoDias();
         List<Cliente> listAvisoHoje = listaAvisoHoje();
         
-        listAtrasados.forEach(cliente -> {
-            nomeCliente = cliente.getNome();
-            EmailService email = new EmailService("Entrega de livro em atraso", MSGATRASADO, cliente.getEmail());
-            email.enviaEmail();
-        });
+        if(!listAtrasados.isEmpty()){
+            listAtrasados.forEach((Cliente cliente) -> {
+                EmailService email = new EmailService("Entrega de livro em atraso", 
+                        "Prezado(a) " + cliente.getNome() + ",\nVerificamos um atraso na entrega "
+            + "de livro(s) em seu nome.\nPedimos a você que nos procure para a melhor solução da situação \ne para "
+            + "que você volte, o mais rápido possível, a aproveitar dos nossos serviços.\n\n"
+            + "Atenciosamente,\nEquipe Biblioteca Livros.", cliente.getEmail());
+                email.enviaEmail();
+            });
+        }
         
-        listAvisoDias.forEach(cliente -> {
-            nomeCliente = cliente.getNome();
-            EmailService email = new EmailService("Prazo de entrega vence amanhã!", MSGAVISOAMANHA, cliente.getEmail());
-            email.enviaEmail();
-        });
+        if(!listAvisoDias.isEmpty()){
+            listAvisoDias.forEach((Cliente cliente) -> {
+                EmailService email = new EmailService("Prazo de entrega vence amanhã!", 
+                        "Prezado(a) " + cliente.getNome() + ",\nO prazo de entrega do livro "
+            + "vence amanhã.\nEsteja sempre em dia com a nossa biblioteca para poder aproveitar dos nossos serviços sempre."
+            + "\n\nAtenciosamente,\nEquipe Biblioteca Livros.", cliente.getEmail());
+                email.enviaEmail();
+            });
+        }
         
-        listAvisoHoje.forEach(cliente -> {
-            nomeCliente = cliente.getNome();
-            EmailService email = new EmailService("Prazo de entrega vence hoje!", MSGAVISOHOJE, cliente.getEmail());
-            email.enviaEmail();
-        });
-       
+        if(!listAvisoHoje.isEmpty()){
+            listAvisoHoje.forEach((Cliente cliente) -> {
+                EmailService email = new EmailService("Prazo de entrega vence hoje!", 
+                    "Prezado(a) " + cliente.getNome() + ",\nO prazo de entrega do livro "
+            + "vence hoje.\nEsteja sempre em dia com a nossa biblioteca para poder aproveitar dos nossos serviços sempre."
+            + "\n\nAtenciosamente,\nEquipe Biblioteca Livros.", cliente.getEmail());
+                email.enviaEmail();
+            });
+        }
     }
     
     private static List<Cliente> listaAtrasados(){
-        return listaEmprestimo
+        return listEmprestimo
                 .stream()
                 .filter(emprestimo -> {
                     long dias = ChronoUnit.DAYS.between(emprestimo.getDataPrazoEntrega(), LocalDate.now());
@@ -86,7 +87,7 @@ public class AtividadesDiariasBeans {
     }
     
     private static List<Cliente> listaAvisoDias(){
-        return listaEmprestimo
+        return listEmprestimo
                 .stream()
                 .filter(emprestimo -> {
                     long dias = ChronoUnit.DAYS.between(emprestimo.getDataPrazoEntrega(), LocalDate.now());
@@ -97,7 +98,7 @@ public class AtividadesDiariasBeans {
     }
     
     private static List<Cliente> listaAvisoHoje(){
-        return listaEmprestimo
+        return listEmprestimo
                 .stream()
                 .filter(emprestimo -> {
                     long dias = ChronoUnit.DAYS.between(emprestimo.getDataPrazoEntrega(), LocalDate.now());
