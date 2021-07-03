@@ -21,28 +21,28 @@ import java.util.Set;
  * @author RafaelRodrigues1
  */
 public class ClienteDao implements ClienteDaoInterface<Cliente> {
-    
+
     private Connection connection = null;
     private Statement statement = null;
     private PreparedStatement prepStatement = null;
     private ResultSet resultSet = null;
-    
+
     @Override
     public List<Cliente> listar() {
-        try{
+        try {
             connection = DBConnection.getConnection();
             prepStatement = connection.prepareStatement("SELECT * FROM cliente ORDER BY nome;"); // ORDER BY nome;");
             return funcaoLista(prepStatement);
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             return null;
-        }finally{
+        } finally {
             DBConnection.closeConnection(resultSet, prepStatement, connection);
         }
     }
-    
+
     @Override
     public Boolean cadastrar(Cliente cliente) {
-        try{
+        try {
             long data = cliente.getDataNascimento()
                     .atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli();
             connection = DBConnection.getConnection();
@@ -58,16 +58,16 @@ public class ClienteDao implements ClienteDaoInterface<Cliente> {
             prepStatement.setString(6, cliente.getTelefone());
             int rowsAffected = prepStatement.executeUpdate();
             return rowsAffected > 0;
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             throw new DBException("Cliente já consta no cadastro");
-        }finally{
+        } finally {
             DBConnection.closeConnection(prepStatement, connection);
         }
     }
-    
-     @Override
+
+    @Override
     public Boolean alterar(Cliente cliente) {
-        try{
+        try {
             long data = LongDate.getLongDate(cliente.getDataNascimento());
             connection = DBConnection.getConnection();
             prepStatement = connection.prepareStatement("UPDATE cliente SET nome = ? , email = ? ,"
@@ -80,220 +80,220 @@ public class ClienteDao implements ClienteDaoInterface<Cliente> {
             prepStatement.setInt(6, cliente.getId());
             int rowsAffected = prepStatement.executeUpdate();
             return rowsAffected > 0;
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             return false;
-        }finally{
+        } finally {
             DBConnection.closeConnection(resultSet, prepStatement, connection);
         }
     }
 
     @Override
     public Boolean apagar(Integer id) {
-        try{
+        try {
             connection = DBConnection.getConnection();
             prepStatement = connection.prepareStatement(""
                     + "DELETE FROM cliente WHERE id = ? LIMIT 1;");
             prepStatement.setInt(1, id);
             int rowsAffected = prepStatement.executeUpdate();
-            return rowsAffected > 0; 
-        }catch(SQLException ex){
+            return rowsAffected > 0;
+        } catch (SQLException ex) {
             return false;
-        }finally{
+        } finally {
             DBConnection.closeConnection(resultSet, prepStatement, connection);
         }
     }
-    
+
     @Override
     public List<Cliente> pesquisar(String pesquisa) {
-        try{
+        try {
             connection = DBConnection.getConnection();
             prepStatement = connection.prepareStatement("SELECT * FROM cliente WHERE nome LIKE ? ORDER BY nome;");
-            prepStatement.setString(1, "%"+pesquisa+"%");
+            prepStatement.setString(1, "%" + pesquisa + "%");
             return funcaoLista(prepStatement);
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             return null;
-        }finally{
+        } finally {
             DBConnection.closeConnection(resultSet, prepStatement, connection);
         }
     }
-    
+
     @Override
-    public List<Cliente> funcaoLista(PreparedStatement prepStatement) throws SQLException{
+    public List<Cliente> funcaoLista(PreparedStatement prepStatement) throws SQLException {
         List<Cliente> listaClientes = new ArrayList<>();
         resultSet = prepStatement.executeQuery();
-        while(resultSet.next()){
-                Cliente cliente = instanciaTipo(resultSet);
-                listaClientes.add(cliente);
-            }
-            return listaClientes;
+        while (resultSet.next()) {
+            Cliente cliente = instanciaTipo(resultSet);
+            listaClientes.add(cliente);
+        }
+        return listaClientes;
     }
-    
+
     @Override
-    public Cliente instanciaTipo(ResultSet resultSet) throws SQLException{
-        Cliente cliente = new Cliente(resultSet.getInt("id"), resultSet.getString("nome"), 
-                            resultSet.getDate("data_nascimento").toLocalDate(), 
-                            resultSet.getString("email"), resultSet.getString("cpf"), 
-                            resultSet.getString("endereco"), resultSet.getString("telefone"), 
-                            resultSet.getInt("quantidade_livros"), resultSet.getBoolean("liberado"));
+    public Cliente instanciaTipo(ResultSet resultSet) throws SQLException {
+        Cliente cliente = new Cliente(resultSet.getInt("id"), resultSet.getString("nome"),
+                resultSet.getDate("data_nascimento").toLocalDate(),
+                resultSet.getString("email"), resultSet.getString("cpf"),
+                resultSet.getString("endereco"), resultSet.getString("telefone"),
+                resultSet.getInt("quantidade_livros"), resultSet.getBoolean("liberado"));
         return cliente;
     }
-    
+
     @Override
-    public Cliente buscarPorId(Integer id){
-        try{
+    public Cliente buscarPorId(Integer id) {
+        try {
             Cliente cliente = null;
             connection = DBConnection.getConnection();
             prepStatement = connection.prepareStatement("SELECT * FROM cliente WHERE id = ? ;");
             prepStatement.setInt(1, id);
             resultSet = prepStatement.executeQuery();
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 cliente = instanciaTipo(resultSet);
             }
             return cliente;
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             return null;
-        }finally{
+        } finally {
             DBConnection.closeConnection(resultSet, prepStatement, connection);
         }
     }
-    
+
     @Override
-    public List<Cliente> listarEmprestimo(){
-        try{
+    public List<Cliente> listarEmprestimo() {
+        try {
             connection = DBConnection.getConnection();
             prepStatement = connection.prepareStatement("SELECT * FROM cliente "
                     + "WHERE liberado = true ORDER BY nome;");
             return funcaoLista(prepStatement);
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             return null;
-        }finally{
+        } finally {
             DBConnection.closeConnection(resultSet, prepStatement, connection);
         }
     }
 
     @Override
     public Boolean desautorizaCliente(Cliente cliente) {
-        try{
+        try {
             connection = DBConnection.getConnection();
             prepStatement = connection.prepareStatement("UPDATE cliente SET liberado = false "
                     + "WHERE id = ? LIMIT 1;");
             prepStatement.setInt(1, cliente.getId());
             int rowsAffected = prepStatement.executeUpdate();
             return rowsAffected > 0;
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             ex.printStackTrace();
             return false;
-        }finally{
+        } finally {
             DBConnection.closeConnection(resultSet, prepStatement, connection);
         }
     }
 
     @Override
     public Boolean autorizaCliente(Cliente cliente) {
-        try{
+        try {
             connection = DBConnection.getConnection();
             prepStatement = connection.prepareStatement("UPDATE cliente SET liberado = true "
                     + "WHERE id = ? LIMIT 1;");
             prepStatement.setInt(1, cliente.getId());
             int rowsAffected = prepStatement.executeUpdate();
             return rowsAffected > 0;
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             ex.printStackTrace();
             return false;
-        }finally{
+        } finally {
             DBConnection.closeConnection(resultSet, prepStatement, connection);
         }
     }
-    
+
     @Override
     public List<Cliente> pesquisarEmprestimo(String pesquisa) {
-        try{
+        try {
             connection = DBConnection.getConnection();
             prepStatement = connection.prepareStatement("SELECT * FROM cliente "
                     + "WHERE nome LIKE ? AND liberado = true ORDER BY nome;");
-            prepStatement.setString(1, "%"+pesquisa+"%");
+            prepStatement.setString(1, "%" + pesquisa + "%");
             return funcaoLista(prepStatement);
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             return null;
-        }finally{
+        } finally {
             DBConnection.closeConnection(resultSet, prepStatement, connection);
         }
     }
 
     @Override
     public Boolean tomaLivroEmprestado(Cliente cliente) {
-        try{
+        try {
             connection = DBConnection.getConnection();
             prepStatement = connection.prepareStatement("UPDATE cliente "
                     + "SET quantidade_livros = ? "
                     + "WHERE id = ? LIMIT 1 ;");
-            prepStatement.setInt(1, (cliente.getNumeroLivros()+1));
+            prepStatement.setInt(1, (cliente.getNumeroLivros() + 1));
             prepStatement.setInt(2, cliente.getId());
             int rowsAffected = prepStatement.executeUpdate();
             return rowsAffected > 0;
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             return false;
-        }finally{
+        } finally {
             DBConnection.closeConnection(resultSet, prepStatement, connection);
         }
     }
 
     @Override
     public Boolean devolveLivro(Cliente cliente) {
-        try{
+        try {
             connection = DBConnection.getConnection();
             prepStatement = connection.prepareStatement("UPDATE cliente "
                     + "SET quantidade_livros = ? "
                     + "WHERE id = ? LIMIT 1 ;");
-            prepStatement.setInt(1, (cliente.getNumeroLivros()-1));
+            prepStatement.setInt(1, (cliente.getNumeroLivros() - 1));
             prepStatement.setInt(2, cliente.getId());
             int rowsAffected = prepStatement.executeUpdate();
             return rowsAffected > 0;
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             return false;
-        }finally{
+        } finally {
             DBConnection.closeConnection(resultSet, prepStatement, connection);
         }
     }
 
     @Override
     public Integer numeroLivros(Cliente cliente) {
-        try{
+        try {
             connection = DBConnection.getConnection();
             prepStatement = connection.prepareStatement("SELECT * FROM cliente WHERE id = ? ;");
             prepStatement.setInt(1, cliente.getId());
             resultSet = prepStatement.executeQuery();
             Integer numeroLivros = null;
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 numeroLivros = resultSet.getInt("quantidade_livros");
             }
             return numeroLivros;
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             ex.printStackTrace();
             return null;
-        }finally{
+        } finally {
             DBConnection.closeConnection(resultSet, prepStatement, connection);
         }
     }
 
     @Override
     public Set<Cliente> verificaAtrasos() {
-        try{
+        try {
             long data = LongDate.getLongDate(LocalDate.now());
             connection = DBConnection.getConnection();
             prepStatement = connection.prepareStatement(""
-                            +"SELECT  c.*, e.data_prazo_entrega " +
-                            "FROM cliente c " +
-                            "JOIN emprestimo e " +
-                            "ON c.id = e.id_cliente " +
-                            "WHERE e.data_prazo_entrega < ? AND e.aberto = 1;");
+                    + "SELECT  c.*, e.data_prazo_entrega "
+                    + "FROM cliente c "
+                    + "JOIN emprestimo e "
+                    + "ON c.id = e.id_cliente "
+                    + "WHERE e.data_prazo_entrega < ? AND e.aberto = 1;");
             prepStatement.setDate(1, new Date(data));
             Set<Cliente> setClientes = Set.copyOf(funcaoLista(prepStatement));
             return setClientes;
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             ex.printStackTrace();
             return null;
-        }finally{
+        } finally {
             DBConnection.closeConnection(resultSet, prepStatement, connection);
         }
     }

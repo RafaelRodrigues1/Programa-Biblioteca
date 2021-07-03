@@ -1,6 +1,9 @@
 package com.projetointegrador.model.services.emailservice;
 
 //import javax.mail.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -13,8 +16,8 @@ public class EmailService {
     
     private Transport transport;
     private final String host = "smtp.gmail.com";
-    private final String login = "softbibliotecadsb@gmail.com";
-    private final String senha = "softbiblioteca.";
+    private final String login = getProperties().getProperty("login");
+    private final String senha = getProperties().getProperty("senha");
     private final String assunto;
     private final String texto;
     private final String destinatario;
@@ -57,6 +60,17 @@ public class EmailService {
             System.out.println(e.getMessage());
             e.printStackTrace();
             return false;
+        }
+    }
+    
+    private Properties getProperties(){
+        try(FileInputStream fis = new FileInputStream(new File("C:\\Users\\RAFAEL\\Documents\\NetBeansProjects\\AppProjetoBiblioteca\\src\\com\\projetointegrador\\model\\services\\emailservice\\emaildata.properties"))){
+            Properties prop = new Properties();
+            prop.load(fis);
+            return prop;
+        }catch(IOException ex){
+            ex.printStackTrace();
+            return null;
         }
     }
 }

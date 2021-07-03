@@ -76,4 +76,20 @@ public class MainController {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+    public void abrirSobre() {
+        Panes.mostraMsg("""
+                Projeto integrador do 1° módulo do curso técnico 
+                de Desenvolvimento de Sistemas(2021.1).
+                Aplicação desktop de controle para bibliotecas.
+                Desenvolvedores:
+                        Diego Moisés
+                        Douglas Braz
+                        Fabrício Queiroz
+                        Rafael Rodrigues
+                        Rudimacy Allen
+                        
+                Orientação: Professor Marcelo Araújo
+                 """);
+    }
 }

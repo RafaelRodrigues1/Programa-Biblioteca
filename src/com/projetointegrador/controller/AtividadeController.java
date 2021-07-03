@@ -17,7 +17,6 @@ public class AtividadeController {
     private AtividadeView atividadeView;
     private Usuario usuario;
 
-    //"Beans" não implementado por quantidade baixa de funcionalidade
     public AtividadeController(AtividadeView atividadeView) {
         this.atividadeView = atividadeView;
         preencheTabela();

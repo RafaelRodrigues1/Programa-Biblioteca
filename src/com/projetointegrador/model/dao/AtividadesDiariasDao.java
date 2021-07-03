@@ -23,10 +23,13 @@ public class AtividadesDiariasDao {
             long data = LongDate.getLongDate(LocalDate.now());
             connection = DBConnection.getConnection();
             prepStatement = connection.prepareStatement(""
-                    + "INSERT INTO atividades_diarias(data) VALUES (?);");
+                    + "INSERT INTO atividades_diarias (data)" +
+                        " SELECT * FROM (SELECT ?) AS tmp" +
+                        " WHERE NOT EXISTS (" +
+                        " SELECT data FROM atividades_diarias WHERE data = ?) LIMIT 1;");
             prepStatement.setDate(1, new Date(data));
+            prepStatement.setDate(2, new Date(data));
             int rowsAffected = prepStatement.executeUpdate();
-            System.out.println(rowsAffected);
             return rowsAffected == 1;
         }catch(SQLException ex){
             System.out.println(ex.getMessage());

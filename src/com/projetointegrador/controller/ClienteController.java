@@ -112,7 +112,7 @@ public class ClienteController {
     }
     
     public Boolean verificaPadrao(String cpfPattern){
-        Pattern email = Pattern.compile("\\S+@{1}[a-z A-Z]+(.com|.com.br)");
+        Pattern email = Pattern.compile("\\S+@{1}[a-z A-Z 0-9]+(.com|.com.br)");
         Matcher matchEmail = email.matcher(clienteView.getjTextEmail().getText());
         Pattern cpf = Pattern.compile(cpfPattern);
         Matcher matchCpf = cpf.matcher(clienteView.getjFormattedTextCPF().getText());

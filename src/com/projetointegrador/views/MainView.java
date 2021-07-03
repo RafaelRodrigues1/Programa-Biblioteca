@@ -51,8 +51,7 @@ public final class MainView extends javax.swing.JFrame {
         jMenuLivros = new javax.swing.JMenu();
         jMenuEmprestimos = new javax.swing.JMenu();
         jMenuAtividades = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
-        jMenu1 = new javax.swing.JMenu();
+        jMenuSobre = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -143,17 +142,17 @@ public final class MainView extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenuAtividades);
 
-        jMenu5.setBackground(new java.awt.Color(204, 255, 255));
-        jMenu5.setForeground(new java.awt.Color(0, 0, 0));
-        jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/projetointegrador/Imagens/DB.png"))); // NOI18N
-        jMenu5.setText("Livros DataBase");
-        jMenu5.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jMenuBar1.add(jMenu5);
-
-        jMenu1.setForeground(new java.awt.Color(0, 0, 0));
-        jMenu1.setText("Sobre");
-        jMenu1.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jMenuBar1.add(jMenu1);
+        jMenuSobre.setBackground(new java.awt.Color(204, 255, 255));
+        jMenuSobre.setForeground(new java.awt.Color(0, 0, 0));
+        jMenuSobre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/projetointegrador/Imagens/DB.png"))); // NOI18N
+        jMenuSobre.setText("Sobre");
+        jMenuSobre.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jMenuSobre.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuSobreMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenuSobre);
 
         setJMenuBar(jMenuBar1);
 
@@ -189,6 +188,10 @@ public final class MainView extends javax.swing.JFrame {
     private void jMenuEmprestimosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuEmprestimosMouseClicked
         mainController.abrirEmprestimos();
     }//GEN-LAST:event_jMenuEmprestimosMouseClicked
+
+    private void jMenuSobreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuSobreMouseClicked
+        mainController.abrirSobre();
+    }//GEN-LAST:event_jMenuSobreMouseClicked
 
     /**
      * @param args the command line arguments
@@ -250,12 +253,11 @@ public final class MainView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelLogOut;
     private javax.swing.JLabel jLabelNomeUsuario;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenuAtividades;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuClientes;
     private javax.swing.JMenu jMenuEmprestimos;
     private javax.swing.JMenu jMenuLivros;
+    private javax.swing.JMenu jMenuSobre;
     // End of variables declaration//GEN-END:variables
 }
