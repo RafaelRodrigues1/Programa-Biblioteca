@@ -36,14 +36,12 @@ public class Emprestimo {
     //Prazo de 5 dias para devolução do livro
     public final LocalDate calculaPrazo(LocalDate dataEmprestimo){
         LocalDate dataPrazoEntrega = dataEmprestimo.plusDays(PRAZO);
-        System.out.println(dataPrazoEntrega);
         if(dataPrazoEntrega.getDayOfWeek().getValue()==6){   //6=SÁBADO
             dataPrazoEntrega = dataPrazoEntrega.plusDays(2);
         }
         if(dataPrazoEntrega.getDayOfWeek().getValue()==7){   //7=DOMINGO
             dataPrazoEntrega = dataPrazoEntrega.plusDays(1);
         }
-        System.out.println(dataPrazoEntrega);
         return dataPrazoEntrega;
     }
 

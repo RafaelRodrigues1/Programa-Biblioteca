@@ -31,7 +31,7 @@ public class ClienteDao implements ClienteDaoInterface<Cliente> {
     public List<Cliente> listar() {
         try {
             connection = DBConnection.getConnection();
-            prepStatement = connection.prepareStatement("SELECT * FROM cliente ORDER BY nome;"); // ORDER BY nome;");
+            prepStatement = connection.prepareStatement("SELECT * FROM cliente ORDER BY nome;");
             return funcaoLista(prepStatement);
         } catch (SQLException ex) {
             return null;

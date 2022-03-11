@@ -11,8 +11,10 @@ import com.projetointegrador.model.entities.Cliente;
 import com.projetointegrador.model.entities.Emprestimo;
 import com.projetointegrador.model.entities.Livro;
 import com.projetointegrador.model.entities.Registro;
+import com.projetointegrador.model.services.emailservice.EmailService;
 import com.projetointegrador.views.Panes;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Set;
@@ -37,12 +39,19 @@ public class EmprestimoBeans {
     }
     
     public Boolean efetuaEmprestimo(Integer idCliente, String nomeCliente, Integer quantidadeEmprestimos,
-            Integer codigoLivro, String Titulo){
+            Integer codigoLivro, String titulo){
+        DateTimeFormatter sdf = DateTimeFormatter.ofPattern("dd/MM/yyyy"); 
         Emprestimo emprestimo = new Emprestimo(new Cliente(idCliente, nomeCliente, quantidadeEmprestimos), 
-                new Livro(Titulo, codigoLivro), LocalDate.now());
+                new Livro(titulo, codigoLivro), LocalDate.now());
         if(emprestimoDao.efetuaEmprestimo(emprestimo)){
             if(livroDao.emprestaLivro(emprestimo.getLivro()) && 
                     clienteDao.tomaLivroEmprestado(emprestimo.getCliente())){
+                    Cliente cliente = clienteDao.buscarPorId(idCliente);
+                    EmailService email = new EmailService("Empréstimo de livro efetuado", 
+                            "Sr. " + cliente.getNome() + ",\nEmpréstimo do livro " + titulo + 
+                            " efetuado com sucesso!\nData de entrega: " + sdf.format(emprestimo.getDataPrazoEntrega())
+                                + "\n\nAtenciosamente,\nEquipe BiblioSoft.", cliente.getEmail());
+                    email.start();
                     RegistroDao.cadastroRegistro(new Registro(emprestimoController.getUsuario(), 
                     "Empréstimo do livro: " + emprestimo.getLivro().getTitulo()
                             + " para o Cliente: " + emprestimo.getCliente().getNome()));

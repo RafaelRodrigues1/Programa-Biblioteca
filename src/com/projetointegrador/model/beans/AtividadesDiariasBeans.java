@@ -49,8 +49,8 @@ public class AtividadesDiariasBeans extends Thread{
                         "Prezado(a) " + cliente.getNome() + ",\nVerificamos um atraso na entrega "
             + "de livro(s) em seu nome.\nPedimos a você que nos procure para a melhor solução da situação \ne para "
             + "que você volte, o mais rápido possível, a aproveitar dos nossos serviços.\n\n"
-            + "Atenciosamente,\nEquipe Biblioteca Livros.", cliente.getEmail());
-                email.enviaEmail();
+            + "Atenciosamente,\nEquipe BiblioSoft.", cliente.getEmail());
+                email.start();
             });
         }
         
@@ -59,7 +59,7 @@ public class AtividadesDiariasBeans extends Thread{
                 EmailService email = new EmailService("Prazo de entrega vence amanhã!", 
                         "Prezado(a) " + cliente.getNome() + ",\nO prazo de entrega do livro "
             + "vence amanhã.\nEsteja sempre em dia com a nossa biblioteca para poder aproveitar dos nossos serviços sempre."
-            + "\n\nAtenciosamente,\nEquipe Biblioteca Livros.", cliente.getEmail());
+            + "\n\nAtenciosamente,\nEquipe BiblioSoft.", cliente.getEmail());
                 email.enviaEmail();
             });
         }
@@ -69,7 +69,7 @@ public class AtividadesDiariasBeans extends Thread{
                 EmailService email = new EmailService("Prazo de entrega vence hoje!", 
                     "Prezado(a) " + cliente.getNome() + ",\nO prazo de entrega do livro "
             + "vence hoje.\nEsteja sempre em dia com a nossa biblioteca para poder aproveitar dos nossos serviços sempre."
-            + "\n\nAtenciosamente,\nEquipe Biblioteca Livros.", cliente.getEmail());
+            + "\n\nAtenciosamente,\nEquipe BiblioSoft.", cliente.getEmail());
                 email.enviaEmail();
             });
         }

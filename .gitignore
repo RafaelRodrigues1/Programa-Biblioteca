@@ -1,3 +1,6 @@
 
 *.xml
 *.properties
+*.class
+*.class
+build/classes/com/projetointegrador/model/beans/AtividadesDiariasBeans.class

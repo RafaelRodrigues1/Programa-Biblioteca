@@ -12,7 +12,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-public class EmailService {
+public class EmailService extends Thread {
     
     private Transport transport;
     private final String host = "smtp.gmail.com";
@@ -27,7 +27,11 @@ public class EmailService {
         this.assunto = assunto;
         this.texto = texto;
         this.destinatario = destinatario;
-
+    }
+    
+    @Override
+    public void run(){
+        enviaEmail();
     }
     
     public Boolean enviaEmail(){
